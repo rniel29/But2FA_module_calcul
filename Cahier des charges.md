@@ -6,17 +6,17 @@
 BUT INFORMATIQUE 2024-2025  
 INF2-FA
 
-								                         KOUNDI Maryam  
+	    KOUNDI Maryam  
             NIEL Ronan  
             BELOT Hervé  
 **SOMMAIRE**
 
-1. **[Introduction	1](#introduction)**  
-2. [**Enoncé	3**](#enoncé)  
-3. [**Pré-requis.	3**](#pré-requis)  
-4. [**Priorités.	3**](#priorités)
+1. [**Introduction	1**]
+2. [**Enoncé	3**]
+3. [**Pré-requis.	3**] 
+4. [**Priorités.	3**]
 
-# **Introduction** {#introduction}
+# **Introduction** 
 
 Le présent document constitue un cahier des charges ayant pour objectif de synthétiser les besoins exprimés par notre client. Ce document joue un rôle essentiel dans la définition, la structuration et l’orientation du projet, en fonction des exigences et attentes du commanditaire, afin d'assurer la livraison d’un résultat final conforme et de qualité. Il regroupe l'ensemble des informations indispensables à la bonne réalisation du projet.
 
@@ -26,7 +26,7 @@ Le cahier des charges aborde plusieurs aspects clés du projet, notamment sa voc
 
 Dans le cadre de ce projet, le besoin principal du client est de concevoir un site web disposant d’une interface dédiée à l’exécution de modules de calculs. Le site devra être capable de gérer quatre types d’utilisateurs distincts, chacun ayant accès à une interface personnalisée avec des fonctionnalités spécifiques adaptées à leur rôle. Ce cahier des charges vise à détailler ces exigences et à s'assurer que le projet soit conforme aux attentes du client.
 
-# **Enoncé** {#enoncé}
+# **Enoncé** 
 
 # 
 
@@ -65,7 +65,7 @@ revanche, il a la possibilité de visualiser les informations disponibles sur la
 page d’accueil, accompagnée d’une vidéo explicative montrant l’intérêt pour le  
 visiteur de s’inscrire sur la plateforme.
 
-# **Pré-requis** {#pré-requis}
+# **Pré-requis** 
 
 De manière à mener à bien ce projet nous avons besoin de plusieurs ressources logicielles tel que : 
 
@@ -85,7 +85,7 @@ De plus, des compétences en bases de données seront nécessaires, avec SQL et 
 
 Enfin, des connaissances en programmation système et en architecture réseau seront également mobilisées. L'ensemble de ces ressources est nécessaire pour développer un site web fonctionnel et sécurisé.
 
-# **Priorités** {#priorités}
+# **Priorités** 
 
 En examinant attentivement le projet et en tenant compte des consignes fournies par le client, nous avons identifié plusieurs tâches à traiter en priorité. Tout d’abord, il est impératif de concevoir une maquette web accompagnée d’une charte graphique. Ces éléments sont essentiels pour visualiser et planifier l'apparence et la structure du site web avant même d'entamer son développement. La maquette permet de valider si la conception proposée répond aux attentes et besoins du client.
 
