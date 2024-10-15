@@ -6,9 +6,9 @@
 BUT INFORMATIQUE 2024-2025  
 INF2-FA
 
-	    KOUNDI Maryam  
-            NIEL Ronan  
-            BELOT Hervé  
+KOUNDI Maryam  
+NIEL Ronan  
+BELOT Hervé  
 **SOMMAIRE**
 
 1. [**Introduction	1**]
