@@ -21,12 +21,28 @@ html, body {
     height: 100vh; /* Hauteur à 100% de la fenêtre d'affichage */
     overflow: hidden; /* Supprime les barres de défilement */
 }
+
+iframe{
+    width :50%;
+    height:40%;
+}
+
+.Btn_acc{
+    height: 40px;
+}
 .header{
     height: 10vh;
     display: flex;
     background-color: #517a76;
     justify-content: space-between;
+    align-items: center; 
+}
 
+.header_acc{
+    height: 10vh;
+    display: flex;
+    background-color: #517a76;
+    justify-content: space-between;
     align-items: center; 
 }
 
@@ -68,6 +84,18 @@ body {background:none transparent;
     justify-content: space-around;
     height: 80vh;
 }
+
+.center_acc{
+    display: flex;
+    align-items: center;
+    justify-content: center ;
+    justify-content: space-around;
+    background-color: #c6c7b9;
+    height: 80vh;
+    width: 100%;
+
+}
+
 
 .Presentation{
     width: 50vh;
