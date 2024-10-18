@@ -6,17 +6,17 @@
 BUT INFORMATIQUE 2024-2025  
 INF2-FA
 
-KOUNDI Maryam  
-NIEL Ronan  
-BELOT Hervé  
+								                         KOUNDI Maryam  
+            NIEL Ronan  
+            BELOT Hervé  
 **SOMMAIRE**
 
-1. [**Introduction	1**]
-2. [**Enoncé	3**]
-3. [**Pré-requis.	3**] 
-4. [**Priorités.	3**]
+1. **[Introduction	1](#introduction)**  
+2. [**Enoncé	3**](#enoncé)  
+3. [**Pré-requis.	3**](#pré-requis)  
+4. [**Priorités.	3**](#priorités)
 
-# **Introduction** 
+# **Introduction** {#introduction}
 
 Le présent document constitue un cahier des charges ayant pour objectif de synthétiser les besoins exprimés par notre client. Ce document joue un rôle essentiel dans la définition, la structuration et l’orientation du projet, en fonction des exigences et attentes du commanditaire, afin d'assurer la livraison d’un résultat final conforme et de qualité. Il regroupe l'ensemble des informations indispensables à la bonne réalisation du projet.
 
@@ -26,11 +26,11 @@ Le cahier des charges aborde plusieurs aspects clés du projet, notamment sa voc
 
 Dans le cadre de ce projet, le besoin principal du client est de concevoir un site web disposant d’une interface dédiée à l’exécution de modules de calculs. Le site devra être capable de gérer quatre types d’utilisateurs distincts, chacun ayant accès à une interface personnalisée avec des fonctionnalités spécifiques adaptées à leur rôle. Ce cahier des charges vise à détailler ces exigences et à s'assurer que le projet soit conforme aux attentes du client.
 
-# **Enoncé** 
+# **Enoncé** {#enoncé}
 
 # 
 
-L'application web demandée par le client doit principalement être capable d’effectuer des calculs à l’aide de différents modules. Elle sera développée essentiellement en PHP,  en HTML/CSS et en SQL.
+L'application web demandée par le client doit principalement être capable d’effectuer des calculs à l’aide de différents modules. Elle sera développée essentiellement en PHP, en HTML/CSS et en SQL.
 
 L’application doit être capable de supporter quatre différents types d’utilisateurs, ayant des caractéristiques et possibilités d’actions propres à leurs fonctions : 
 
@@ -41,12 +41,12 @@ Il disposera également d’un historique stockant les messages d’erreur afin
 qu’il puisse consulter, corriger les erreurs et en faire le suivi.
 
 • Un seul administrateur web enregistré dans la base de données avec comme  
-**login:adminweb** et **mot de passe: adminweb** (identifiants qui ne doivent pas  
+**login : adminweb** et **mot de passe : adminweb** (identifiants qui ne doivent pas  
 être changés).   
 L’administrateur lorsqu’il est connecté peut voir la liste des utilisateurs  
 inscrits, peut créer des comptes utilisateurs à partir d’un fichier csv, peut  
 supprimer des comptes utilisateurs et l’historique liés à ces comptes. Toutes  
-ces modifications doivent être enregistré dans un fichier log consultable  
+ces modifications doivent être enregistrées dans un fichier log consultable  
 ultérieurement. 
 
 • Un visiteur à la possibilité de devenir membre en s’inscrivant sur le site via  
@@ -65,27 +65,27 @@ revanche, il a la possibilité de visualiser les informations disponibles sur la
 page d’accueil, accompagnée d’une vidéo explicative montrant l’intérêt pour le  
 visiteur de s’inscrire sur la plateforme.
 
-# **Pré-requis** 
+# **Pré-requis** {#pré-requis}
 
-De manière à mener à bien ce projet nous avons besoin de plusieurs ressources logicielles tel que : 
+De manière à mener à bien ce projet, nous avons besoin de plusieurs ressources logicielles tel que : 
 
-- Un environnement de développement pour HTML, CSS et php comme webstorm.  
-- Un outil pour le développement de logiciels collaboratifs tel que github dans lequel on pourra trouver la documentation, la mise à disposition du code et toute autre information concernant le projet.  
+- Un environnement de développement pour HTML, CSS et PHP comme WebStorm.  
+- Un outil pour le développement de logiciels collaboratifs tel que GitHub dans lequel on pourra trouver la documentation, la mise à disposition du code et toute autre information concernant le projet.  
 - Un espace d'échange et de concertation entre les développeurs tel que discord.  
 - Un outil numérique permettant d’organiser la gestion et l’avancement du projet permettant de créer des tâches et donner leur avancement. Pour cela, nous utiliserons JIRA.
 
-Nous avons également besoin de ressources matérielle : 
+Nous avons également besoin de ressources matériel : 
 
-- Un raspberry pi 4 ou toutes les applications Web, serveur web et base de données seront installés.  
-- Une carte SD que nous préparerons pour pouvoir y installer les serveurs et applications dans le rasperry pi 4\.
+- Un Raspberry pi 4 ou toutes les applications Web, serveur web et base de données seront installés.  
+- Une carte SD que nous préparerons pour pouvoir y installer les serveurs et applications dans le Raspberry pi 4\.
 
-Plusieurs compétences essentielles seront mobiliser. En effet, les connaissances que nous avons acquises en HTML, CSS et PHP vont nous permettre de développer le site web, et d'établir une interaction fluide entre l’utilisateur et le serveur. Ces langages nous permettront non seulement de styliser l’interface du site, mais aussi d’y intégrer les différents modules de calculs, notamment ceux axés sur le chapitre des probabilités. 
+Plusieurs compétences essentielles seront mobilisées. En effet, les connaissances que nous avons acquises en HTML, CSS et PHP vont nous permettre de développer le site web, et d'établir une interaction fluide entre l’utilisateur et le serveur. Ces langages nous permettront non seulement de styliser l’interface du site, mais aussi d’y intégrer les différents modules de calculs, notamment ceux axés sur le chapitre des probabilités. 
 
-De plus, des compétences en bases de données seront nécessaires, avec SQL et MYSQL, pour gérer, stocker et rechercher les données du site mais également celles entrées par l'utilisateur. Par conséquent, la sécurité des informations et des données sur le site est nécessaire. Pour cela, nous devrons faire appel à des notions de cryptographie et sécurité, afin de protéger les données sensibles des utilisateurs, en chiffrant les communications et en prévenant les accès non autorisés.
+De plus, des compétences en bases de données seront nécessaires, avec SQL et MYSQL, pour gérer, stocker et rechercher les données du site, mais également celles entrées par l'utilisateur. Par conséquent, la sécurité des informations et des données sur le site est nécessaire. Pour cela, nous devrons faire appel à des notions de cryptographie et sécurité, afin de protéger les données sensibles des utilisateurs, en chiffrant les communications et en prévenant les accès non autorisés.
 
 Enfin, des connaissances en programmation système et en architecture réseau seront également mobilisées. L'ensemble de ces ressources est nécessaire pour développer un site web fonctionnel et sécurisé.
 
-# **Priorités** 
+# **Priorités** {#priorités}
 
 En examinant attentivement le projet et en tenant compte des consignes fournies par le client, nous avons identifié plusieurs tâches à traiter en priorité. Tout d’abord, il est impératif de concevoir une maquette web accompagnée d’une charte graphique. Ces éléments sont essentiels pour visualiser et planifier l'apparence et la structure du site web avant même d'entamer son développement. La maquette permet de valider si la conception proposée répond aux attentes et besoins du client.
 
