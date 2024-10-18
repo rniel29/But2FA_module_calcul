@@ -1,0 +1,158 @@
+@font-face {
+    font-family: 'Regular'; 
+    src: url('font/GlacialIndifference-Regular') format('woff'); 
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Bold'; 
+    src: url('font/GlacialIndifference-Bold') format('woff'); 
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+html, body {
+ 
+    font-family: 'Regular', sans-serif;
+    margin: 0;
+    padding: 0;
+    width: 100vw; /* Largeur à 100% de la fenêtre d'affichage */
+    height: 100vh; /* Hauteur à 100% de la fenêtre d'affichage */
+    overflow: hidden; /* Supprime les barres de défilement */
+}
+.header{
+    height: 10vh;
+    display: flex;
+    background-color: #517a76;
+    justify-content: space-between;
+
+    align-items: center; 
+}
+
+.menu {
+    margin-left: 1%;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    border: 1px solid transparent;
+    background-color: transparent;
+}
+
+
+.logo{
+    height: 10vh;
+}
+
+.menu:hover {
+    border: 1px solid black; /* Bordure noire visible au survol */
+    background-color: white;
+}
+
+.buttons, a{
+    text-decoration: none;
+    display: flex;
+    background-color: #517a76;
+    flex-direction: column;
+    justify-content: center;
+    width: 200px;
+}
+
+body {background:none transparent;
+}
+.center{
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+    height: 80vh;
+}
+
+.Presentation{
+    width: 50vh;
+}
+.footer{
+    height: 10vh;
+    display: flex;
+    background-color: #517a76;
+    justify-content: space-between;
+}
+iframe{
+    width: 50vh;
+    border: none;
+    background-color: transparent;
+}
+
+ul.sans-puces {
+    display: flex;
+    justify-content: center;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    width: 80%;
+    list-style-type: none; 
+    padding-right: 5%;
+}
+
+.center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #c6c7b9;
+    width: 100%;
+}
+
+
+
+.Formulaire{
+    display: block;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 3rem;
+    text-align: center;
+    border: 1px, solid;
+    border-color: black;
+    width: 280px;
+    height: auto;
+    border-radius: 50px;
+}
+
+input{
+    font-family: 'Regular' , sans-serif;
+    font-size: 18px;
+    text-align: center;
+    margin: 5px;
+    width: 250px;
+    height: 30px;
+    border-radius: 10px;
+}
+
+.Formul_Inscript {
+    border: black solid 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 380px;
+    height: 50px;
+    margin-top: 5px;
+    background-color: #517a76;
+    border-radius: 10px;
+}
+
+
+.Btn_Form_Co{
+    position: relative;
+    top: -4.5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 300px;
+    height: 50px;
+    margin-top: 5px;
+    background-color: #517a76;
+    border-radius: 10px;
+}
+
