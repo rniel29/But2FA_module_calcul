@@ -197,21 +197,61 @@ input{
     border-radius: 10px;
 }
 
-.Div_table_admin_web{
+.main_admin_dash{
+    background-color: #c6c7b9;
     height: 80vh;
+
     display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.Div_table_admin_web{
+
+    height: 50vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 table,th,td{
-    border: 2px solid;
+    background-color: white;
+    border: 1px solid;
     text-align: center;
     align-items: center;
     border-collapse: collapse;
 }
 
+.table_admin_web_dashboard th,.table_admin_web_Online th{
+    padding: 15px;
+}
+
+.table_admin_web_Online,th,td{
+    margin-left: 5vh;
+}
+
+.icon_Online{
+    align-items: center;
+    text-align: center
+}
+
+
 .Btn_hist,.Btn_Sup{
-    height: 2vh;
-    width: 3vh;
+    height: 2.5vh;
+    width: 5vh;
+}
+.Btn_Sup{
+    background-color: #af4545;
+}
+.Btn_hist{
+    background-color: #517a76;
+}
+
+.Btn_adm_consultation{
+    height: 5vh;
+    width: 30vh;
+    border-radius: 10px;
 }
 .Btn_consult_modif{
     width: 20%;
