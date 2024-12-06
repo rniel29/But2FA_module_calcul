@@ -202,13 +202,36 @@ input{
     display: flex;
 }
 
-.table_admin_web,th,td{
-    border: 1px solid;
+table,th,td{
+    border: 2px solid;
     text-align: center;
     align-items: center;
+    border-collapse: collapse;
 }
 
 .Btn_hist,.Btn_Sup{
     height: 2vh;
     width: 3vh;
+}
+.Btn_consult_modif{
+    width: 20%;
+    margin-left: 40%;
+    border-radius: 10px;
+    width: 250px;
+    height: 30px;
+    background-color: #e9ecef;
+}
+
+.Div_table_admin_systeme{
+    height: 80%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-left:10%;
+}
+
+.table_admin_systeme{
+    height: 80%;
+    background-color: #e9ecef;
 }
