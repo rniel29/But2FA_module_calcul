@@ -197,3 +197,18 @@ input{
     border-radius: 10px;
 }
 
+.Div_table_admin_web{
+    height: 80vh;
+    display: flex;
+}
+
+.table_admin_web,th,td{
+    border: 1px solid;
+    text-align: center;
+    align-items: center;
+}
+
+.Btn_hist,.Btn_Sup{
+    height: 2vh;
+    width: 3vh;
+}
