@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <title>SAE - Accueil</title>
         <link rel="icon" href="Images/Logo.png">
@@ -10,35 +10,37 @@
 
     </head>
     <body>
-        <div class="header_acc">
+        <header>
+            <div class="header_acc">
 
-            <img class = "logo_m" src="Images/Logo.png"></img>
-            <h1>Modul∈Calcul</h1>
-            <img class="profil" src="Images/Profil.png"></img>
-            <div class="buttons">
-                <a href ="Accueil_Visiteur.html"><button class = "Btn_acc ">Déconnexion</button></a>
+                <img class = "logo_m" src="Images/Logo.png" alt="Logo du site web">
+                <h1>Modul∈Calcul</h1>
+                <img class="profil" src="Images/Profil.png" alt="Profil">
+                <div class="buttons">
+                    <button class="Btn_acc" onclick="location.href='Accueil_Visiteur.html'">Déconnexion</button>
+                </div>
             </div>
-        </div>
+        </header>
 
+        <main>
+            <div class="center_acc">
+                <iframe src="Vidéo/DUT%20Informatique%20(INFO)_Présentation.mp4"></iframe>
+                <div class="Presentation">
+                    <h1>Titre</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa nobis repellendus enim quis. Distinctio, reiciendis iste adipisci sunt quo similique rerum! Molestiae repellat id itaque ad alias doloremque velit labore!</p>
+                </div>
+                </div>
+        </main>
+        <footer>
+            <div class="footer">
+                <img src="Images/IUT.jpg" alt="Logo_IUT_UVSQ" width="200" height="100">
 
-        <div class="center_acc">
-            <iframe src="Vidéo/DUT%20Informatique%20(INFO)_Présentation.mp4" allowtransparency="true"></iframe>
-            <div class="Presentation">
-                <h1>Titre</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa nobis repellendus enim quis. Distinctio, reiciendis iste adipisci sunt quo similique rerum! Molestiae repellat id itaque ad alias doloremque velit labore!</p>
+                <ul class="sans-puces">
+                    <li>KOUNDI Maryam</li>
+                    <li>NIEL Ronan</li>
+                    <li>BELOT Hervé</li>
+                </ul>
             </div>
-            </div>
-
-
-        <div class="footer">
-            <img src="Images/IUT.jpg" alt="Logo_IUT_UVSQ" width="200" height="100">
-            
-            <ul class="sans-puces">
-                <li>KOUNDI Maryam</li>
-                <li>NIEL Ronan</li>
-                <li>BELOT Hervé</li>
-            </ul>
-        </div>
-
+        </footer>
     </body>
 </html>
