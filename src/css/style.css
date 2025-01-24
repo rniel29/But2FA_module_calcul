@@ -12,7 +12,7 @@
 }
 
 
-html, body {
+html,body{
  
     background-color: #c6c7b9;
     font-family: 'Regular', sans-serif;
@@ -22,6 +22,7 @@ html, body {
     height: 100vh; /* Hauteur à 100% de la fenêtre d'affichage */
     overflow: hidden; /* Supprime les barres de défilement */
 }
+
 
 #video{
     width: 100%;
@@ -55,6 +56,8 @@ html, body {
 }
 
 .Btn_mod{
+
+    font-weight: bold;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -63,7 +66,7 @@ html, body {
     height: 30px;
     background-color: #517a76;
     border-radius: 10px;
-    font-size: 20px;
+    font-size: 23px;
 }
 
 
