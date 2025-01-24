@@ -22,9 +22,17 @@ html, body {
     overflow: hidden; /* Supprime les barres de défilement */
 }
 
-iframe{
-    width :50%;
-    height:40%;
+#video{
+    width: 100%;
+    height:100%;
+    object-fit: contain;
+}
+
+#ratio{
+    display: flex;
+    align-items: center;
+    width: 40%;
+    aspect-ratio: 4/3;
 }
 
 .Btn_acc{
@@ -119,11 +127,7 @@ body {background:none transparent;
     background-color: #517a76;
     justify-content: space-between;
 }
-iframe{
-    width: 50vh;
-    border: none;
-    background-color: transparent;
-}
+
 
 ul.sans-puces {
     display: flex;
