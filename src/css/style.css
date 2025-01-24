@@ -46,13 +46,6 @@ html, body {
     align-items: center; 
 }
 
-.header_acc{
-    height: 10vh;
-    display: flex;
-    background-color: #517a76;
-    justify-content: space-between;
-    align-items: center; 
-}
 
 .menu {
     margin-left: 1%;
@@ -139,6 +132,7 @@ ul.sans-puces {
     width: 80%;
     list-style-type: none; 
     padding-right: 5%;
+    font-size: 25px;
 }
 
 .center{
