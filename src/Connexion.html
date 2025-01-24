@@ -1,52 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <title>SAE - Connexion</title>
         <link rel="icon" href="Images/Logo.png">
         <meta charset="UTF-8">
         <link href="css/style.css" rel="stylesheet">
-
-
-
     </head>
+
     <body>
-        <div class="header">
-            <img class="logo" src="Images/Logo.png"></img>
-            <h1>Modul∈Calcul</h1>
-            <div class="buttons">
-                <a href ="Inscription.html"><button class = "Btn_acc ">Inscription</button></a>
+        <header>
+            <div class="header">
+                <img class="logo" src="Images/Logo.png" alt="Logo du site web">
+                <h1>Modul∈Calcul</h1>
+                <div class="buttons">
+                    <button class="Btn_acc" onclick="location.href='Inscription.html'">Inscription</button>
+                </div>
             </div>
-        </div>
+        </header>
 
+        <main>
+            <div class="center">
+                <div class="Formul_Inscript"><h1>Connexion</h1></div>
+                <br>
+                <form class="Formulaire">
+                    <div class="Titre_Formulaire"></div>
+                    <h2>Identifiant</h2>
+                    <label for="identifiant"></label>
+                    <input type="text" id="identifiant" name="identifiant">
+                    <h2>Mot de passe</h2>
+                    <label class="input_pswd" for="mot_de_passe"></label>
+                    <input type="password" id ="mot_de_passe" name= "passwd">
+                </form>
+                <input class="Btn_Form_Co" type="submit" name="connexion" value="Se connecter">
+            </div>
+        </main>
 
+        <footer>
 
+            <div class="footer">
+                <img src="Images/IUT.jpg" alt="Logo_IUT_UVSQ" width="200" height="100">
 
-        <div class="center">
-            <div class="Formul_Inscript"><h1>Connexion</h1></div>
-            <br>
-            <form class="Formulaire">    
-                <div class="Titre_Formulaire"></div>
-                <h4>Identifiant</h4>
-                <input type="text">
-                <h4>Mot de passe</h4>
-                <label class="input_pswd"></label>
-                    <input type="password" name = "passwd">
-            </form>
-            <input class="Btn_Form_Co" type="submit" name="connexion" value="Se connecter">
-        </div>
-
-
-        
-
-        <div class="footer">
-            <img src="Images/IUT.jpg" alt="Logo_IUT_UVSQ" width="200" height="100">
-            
-            <ul class="sans-puces">
-                <li>KOUNDI Maryam</li>
-                <li>NIEL Ronan</li>
-                <li>BELOT Hervé</li>
-            </ul>
-        </div>
-
+                <ul class="sans-puces">
+                    <li>KOUNDI Maryam</li>
+                    <li>NIEL Ronan</li>
+                    <li>BELOT Hervé</li>
+                </ul>
+            </div>
+        </footer>
     </body>
 </html>
