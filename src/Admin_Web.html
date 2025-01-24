@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
+
     <head>
         <title>SAE - Admin WEB</title>
         <link rel="icon" href="Images/Logo.png">
@@ -8,100 +9,99 @@
 
     </head>
     <body>
-        <div class="header_acc">
-            <img class = "logo_m" src="Images/Logo.png"></img>
-            <h1>Modul∈Calcul</h1>
-            <img class="profil" src="Images/Profil.png"></img>
-            <div class="buttons">
-                <a href ="Accueil_Visiteur.html"><button class = "Btn_acc ">Déconnexion</button></a>
+        <header>
+            <div class="header_acc">
+                <img class = "logo_m" src="Images/Logo.png" alt="Logo du site web">
+                <h1>Modul∈Calcul</h1>
+                <img class="profil" src="Images/Profil.png" alt="image profil">
+                <div class="buttons">
+                    <button class="Btn_acc" onclick="location.href='Accueil_Visiteur.html'">Déconnexion</button>
+                </div>
             </div>
-        </div>
+        </header>
+        <main>
+            <div class="main_admin_dash">
 
-        <div class="main_admin_dash">
+            <div class="Div_table_admin_web">
 
-
-
-        <div class="Div_table_admin_web">
-
-            <table class="table_admin_web_dashboard">
-                <thead>
-                    <tr>
-                        <th scope="col"> Liste de tous les utilisateurs inscrits</th>
-                        <th scope="col"> Historique</th>
-                        <th scope="col"> Supprimer</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td scope="row">John DOE</td>
-                    <td><button class="Btn_hist"></button></td>
-                    <td><button class="Btn_Sup"></button></td>
-                  </tr>
-                  <tr>
-                    <td scope="row">John DOE</td>
-                    <td><button class="Btn_hist"></button></td>
-                    <td><button class="Btn_Sup"></button></td>
-                  </tr>
-                  <tr>
-                    <td scope="row">John DOE</td>
-                    <td><button class="Btn_hist"></button></td>
-                    <td><button class="Btn_Sup"></button></td>
-                  </tr>
-
-
-                  <tr>
-                    <td scope="row">John DOE</td>
-                    <td><button class="Btn_hist"></button></td>
-                    <td><button class="Btn_Sup"></button></td>
-                  </tr>
-                  <tr>
-                    <td scope="row">John DOE</td>
-                    <td><button class="Btn_hist"></button></td>
-                    <td><button class="Btn_Sup"></button></td>
-                  </tr>
-                  <tr>
-                    <td scope="row">John DOE</td>
-                    <td><button class="Btn_hist"></button></td>
-                    <td><button class="Btn_Sup"></button></td>
-                  </tr>
-
-
-                </tbody>
-            </table>
-
-
-                <table class="table_admin_web_Online">
+                <table class="table_admin_web_dashboard">
                     <thead>
                         <tr>
-                            <th scope="col"> Uilisateurs connectés</th>
+                            <th scope="col"> Liste de tous les utilisateurs inscrits</th>
+                            <th scope="col"> Historique</th>
+                            <th scope="col"> Supprimer</th>
                         </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td scope="row">
-                                <img class="icon_Online" src="Images/icon_Online.png" width="20" height="20">
-                            John DOE
+                        <td>John DOE</td>
+                        <td><button class="Btn_hist" aria-label="Consulter l'historique de John DOE"></button></td>
+                        <td><button class="Btn_Sup" aria-label="Supprimer l'utilisateur John DOE"></button></td>
                       </tr>
+                      <tr>
+                        <td>John DOE</td>
+                          <td><button class="Btn_hist" aria-label="Consulter l'historique de John DOE"></button></td>
+                          <td><button class="Btn_Sup" aria-label="Supprimer l'utilisateur John DOE"></button></td>
+                      </tr>
+                      <tr>
+                        <td>John DOE</td>
+                          <td><button class="Btn_hist" aria-label="Consulter l'historique de John DOE"></button></td>
+                          <td><button class="Btn_Sup" aria-label="Supprimer l'utilisateur John DOE"></button></td>
+                      </tr>
+
+
+                      <tr>
+                        <td>John DOE</td>
+                          <td><button class="Btn_hist" aria-label="Consulter l'historique de John DOE"></button></td>
+                          <td><button class="Btn_Sup" aria-label="Supprimer l'utilisateur John DOE"></button></td>
+                      </tr>
+                      <tr>
+                        <td>John DOE</td>
+                          <td><button class="Btn_hist" aria-label="Consulter l'historique de John DOE"></button></td>
+                          <td><button class="Btn_Sup" aria-label="Supprimer l'utilisateur John DOE"></button></td>
+                      </tr>
+                      <tr>
+                        <td>John DOE</td>
+                          <td><button class="Btn_hist" aria-label="Consulter l'historique de John DOE"></button></td>
+                          <td><button class="Btn_Sup" aria-label="Supprimer l'utilisateur John DOE"></button></td>
+                      </tr>
+
+
                     </tbody>
                 </table>
-            
-        </div>
-
-        <button class="Btn_adm_consultation">Consulter les modifications</button>
-
-    </div>
 
 
+                    <table class="table_admin_web_Online">
+                        <thead>
+                            <tr>
+                                <th scope="col"> Uilisateurs connectés</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                    <img class="icon_Online" src="Images/icon_Online.png" width="20" height="20" alt="bouton vert">
+                                John DOE
+                          </tr>
+                        </tbody>
+                    </table>
 
-        <div class="footer">
-            <img src="Images/IUT.jpg" alt="Logo_IUT_UVSQ" width="200" height="100">
-            
-            <ul class="sans-puces">
-                <li>KOUNDI Maryam</li>
-                <li>NIEL Ronan</li>
-                <li>BELOT Hervé</li>
-            </ul>
-        </div>
+            </div>
 
+            <button class="Btn_adm_consultation">Consulter les modifications</button>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer">
+                <img src="Images/IUT.jpg" alt="Logo_IUT_UVSQ" width="200" height="100">
+
+                <ul class="sans-puces">
+                    <li>KOUNDI Maryam</li>
+                    <li>NIEL Ronan</li>
+                    <li>BELOT Hervé</li>
+                </ul>
+            </div>
+        </footer>
     </body>
 </html>
