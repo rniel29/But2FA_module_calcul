@@ -13,14 +13,14 @@
 
 
 html,body{
- 
+    
     background-color: #c6c7b9;
     font-family: 'Regular', sans-serif;
     margin: 0;
     padding: 0;
     width: 100vw; /* Largeur à 100% de la fenêtre d'affichage */
     height: 100vh; /* Hauteur à 100% de la fenêtre d'affichage */
-    overflow: hidden; /* Supprime les barres de défilement */
+    overflow-x: hidden; /* Supprime les barres de défilement */
 }
 
 
@@ -286,4 +286,23 @@ table,th,td{
 .table_admin_systeme{
     height: 80%;
     background-color: #e9ecef;
+}
+
+.Div_mod{
+    padding: 20px;
+    justify-content: center;
+
+    display: flex;
+
+}
+
+.mod1{
+    text-align: center;
+    align-items: center;
+    padding: 10px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    border: solid 1px black;
+    
 }
