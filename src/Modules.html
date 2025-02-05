@@ -22,24 +22,23 @@
 
             <div class="Div_mod">
                 <div class="mod1">
-                    <h1>Nom module 1</h1>
+
+
+                    <h1>Méthode des rectangles médian</h1>
+                    <img class="Img_rect" src="Images/Formule_Rect_Med.png">
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium repellendus molestias error consequatur voluptatum dicta officia qui id in voluptatem at maiores ad porro earum, tempora sit quia autem aliquam!</p>
-                    <p>val1</p>
+                    <label>Moyenne</label>
                     <input type="text" id="val1" name="val1">
-                    <p>val2</p>
+
+                    <label>Écart type</label>
                     <input type="text" id="val2" name="val2">
-                    <p>val3</p>
+
+                    <label>Portée</label>
                     <input type="text" id="val3" name="val3">
-                    <p>val4</p>
+
+                    <label>Pas</label>
                     <input type="text" id="val4" name="val4">
 
-                    <label for="Calcul-select">Choisissez un mode de calcul:</label>
-
-                    <select name="Calculs" id="Calcul-select">
-                    <option value="">--Sélectionnez une option--</option>
-                    <option value="Calcul1">Méthode des rectangles médian</option>
-
-                    </select>
 
                     <div class="div_Btn_mod"><button class="Btn_calc">Calculer</button></div>
 
@@ -62,4 +61,12 @@
             </div>
         </footer>
     </body>
+
+
+    <button id="rechercheButton" py-click="populateTags" disabled>Recherche</button>
+    <p>Resultat : <div class="output" id="output"></div></p>
+</div>
+
+
+
 </html>
