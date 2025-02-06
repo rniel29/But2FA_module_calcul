@@ -41,7 +41,7 @@ html,body{
     height: 5vh;
 }
 .header{
-    height: 10vh;
+
     display: flex;
     background-color: #517a76;
     justify-content: space-between;
@@ -128,7 +128,12 @@ body {background:none transparent;
     width: 50vh;
 }
 .footer{
-    height: 10vh;
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 6.5vh;
     display: flex;
     background-color: #517a76;
     justify-content: space-between;
