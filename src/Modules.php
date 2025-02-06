@@ -1,45 +1,7 @@
 <?php
-require("src/Modules.php");
-
-// Initialize the result variable
-$resultat = null;
-
-// Vérifier si le formulaire a été soumis
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Récupération des valeurs du formulaire
-    $m = isset($_POST['moyenne']) ? floatval($_POST['moyenne']) : 0;
-    $c = isset($_POST['ecart_type']) ? floatval($_POST['ecart_type']) : 1;
-    $t = isset($_POST['portee']) ? floatval($_POST['portee']) : 1;
-    $n = isset($_POST['pas']) ? intval($_POST['pas']) : 1000;
-
-    // Vérifier que les valeurs sont valides
-    if ($c > 0 && $n > 0) {
-        // Appel de la fonction
-        $resultat = rectangle_median($m, $c, $t, $n);
-    } else {
-        $error_message = "Erreur : Veuillez entrer des valeurs valides.";
-    }
-}
-
-function rectangle_median($m, $c, $t, $n) {
-    $a = 0;  // borne inférieure
-    $b = $t; // borne supérieure
-    $h = ($b - $a) / $n; // calcul de h
-
-    $somme = 0; // variable pour effectuer la somme des points médians
-
-    for ($i = 0; $i < $n; $i++) {
-        $x = $a + ($i + 0.5) * $h; // calcul d'un point médian
-        $formule = ($c / sqrt(2 * M_PI * $c)) * (exp(-0.5 * pow(($x - $m) / $c, 2))); // fonction densité écrite en PHP
-        $somme += $formule;
-    }
-
-    return $somme * $h + 0.5; // Ajout du 0.5 afin de prendre en compte les valeurs présentes entre -infini et 0
-}
+session_start(); // Démarre la session pour accéder aux variables de session
 
 ?>
-
-<!-- HTML Code -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -67,7 +29,7 @@ function rectangle_median($m, $c, $t, $n) {
         <img class="Img_rect" src="Images/Formule_Rect_Med.png" alt="Formule Rectangle Médian">
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium repellendus molestias error consequatur voluptatum dicta officia qui id in voluptatem at maiores ad porro earum, tempora sit quia autem aliquam!</p>
 
-        <form method="post" action="Modules.php" class="mod1">
+        <form method="post" action="ModuleProbaScript.php" class="mod1">
             <label for="moyenne">Moyenne</label>
             <input type="text" id="moyenne" name="moyenne" required>
 
@@ -85,13 +47,18 @@ function rectangle_median($m, $c, $t, $n) {
 
         <div class="result">
             <?php
-            if (isset($resultat)) {
-                echo "Résultat: " . $resultat;
-            } elseif (isset($error_message)) {
-                echo $error_message;
+            // Afficher le résultat s'il existe
+            if (isset($_SESSION['resultat'])) {
+                echo "<p class='resultat'>Résultat: " . $_SESSION['resultat'] . "</p>";
+                // Supprimer le résultat après l'affichage
+                unset($_SESSION['resultat']);
+            } elseif (isset($_SESSION['error_message'])) {
+                echo "<p class='error'>" . $_SESSION['error_message'] . "</p>";
+                unset($_SESSION['error_message']);
             }
             ?>
         </div>
+
     </div>
 </div>
 

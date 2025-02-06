@@ -1,25 +1,33 @@
 <?php
+session_start(); // Démarre la session
 
-require("src/Modules.php");
 // Vérifier si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Récupération des valeurs du formulaire
-    $m = isset($_POST['moyenne']) ? floatval($_POST['moyenne']) : 0;
-    $c = isset($_POST['ecart_type']) ? floatval($_POST['ecart_type']) : 1;
+    $m = isset($_POST['moyenne']) ? floatval($_POST['moyenne']) : 0;//0
+    $c = isset($_POST['ecart_type']) ? floatval($_POST['ecart_type']) : 1;//
     $t = isset($_POST['portee']) ? floatval($_POST['portee']) : 1;
     $n = isset($_POST['pas']) ? intval($_POST['pas']) : 1000;
 
     // Vérifier que les valeurs sont valides
     if ($c > 0 && $n > 0) {
-        // Appel de la fonction
+        // Appel de la fonction pour calculer le résultat
         $resultat = rectangle_median($m, $c, $t, $n);
-        header("location:Modules.php/?resultat=$resultat");
+
+        // Stocker le résultat dans la session
+        $_SESSION['resultat'] = $resultat;
+
+        // Rediriger vers la page Modules.php
+        header("Location: Modules.php");
+        exit; // Important pour stopper l'exécution du script
     } else {
-        echo "<p>Erreur : Veuillez entrer des valeurs valides.</p>";
+        $_SESSION['error_message'] = "Erreur : Veuillez entrer des valeurs valides.";
+        header("Location: Modules.php");
+        exit;
     }
 }
+
 function rectangle_median($m, $c, $t, $n) {
-    $a = 0;  // borne inférieure
+    $a = $m-5*$c;  // borne inférieure
     $b = $t; // borne supérieure
     $h = ($b - $a) / $n; // calcul de h
 
@@ -31,12 +39,6 @@ function rectangle_median($m, $c, $t, $n) {
         $somme += $formule;
     }
 
-    return $somme * $h + 0.5; // Ajout du 0.5 afin de prendre en compte les valeurs présentes entre -infini et 0
+    return $somme * $h ;
 }
-
-// Tests
-echo rectangle_median($m, $c, $t , $n) . "\n";
-echo rectangle_median(2, 3, 4, 10) . "\n";
-?>
-
 ?>
