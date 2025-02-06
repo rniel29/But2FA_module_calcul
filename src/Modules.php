@@ -31,25 +31,28 @@ session_start(); // Démarre la session pour accéder aux variables de session
 
         <form method="post" action="ModuleProbaScript.php" class="mod1">
             <label for="moyenne">Moyenne</label>
-            <input type="text" id="moyenne" name="moyenne" required>
+            <input type="text" id="moyenne" name="moyenne" placeholder="m" required>
 
             <label for="ecart_type">Écart type</label>
-            <input type="text" id="ecart_type" name="ecart_type" required>
+            <input type="text" id="ecart_type" name="ecart_type" placeholder="ecart type > 0" required>
 
             <label for="portee">Portée</label>
-            <input type="text" id="portee" name="portee" required>
+            <input type="text" id="portee" name="portee" placeholder="t" required>
 
-            <label for="pas">Pas</label>
-            <input type="text" id="pas" name="pas" required>
+            <label for="pas">Nombre de rectangles</label>
+            <input type="text" id="pas" name="pas" placeholder="Nb de rectangles < 20 000" required>
 
             <div class="div_Btn_mod"><input type="submit" class="Btn_calc" value="Calculer"></div>
         </form>
+
+
+
 
         <div class="result">
             <?php
             // Afficher le résultat s'il existe
             if (isset($_SESSION['resultat'])) {
-                echo "<p class='resultat'>Résultat: " . $_SESSION['resultat'] . "</p>";
+                echo "<p class='resultat'>Probabilité de P(X<=  " .$_SESSION['portee'].") :" .$_SESSION['resultat'].  "</p>";
                 // Supprimer le résultat après l'affichage
                 unset($_SESSION['resultat']);
             } elseif (isset($_SESSION['error_message'])) {

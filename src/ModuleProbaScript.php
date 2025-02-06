@@ -9,12 +9,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $n = isset($_POST['pas']) ? intval($_POST['pas']) : 1000;
 
     // Vérifier que les valeurs sont valides
-    if ($c > 0 && $n > 0) {
+    if ($c > 0 && $n > 0 && $n<20000)  {
         // Appel de la fonction pour calculer le résultat
         $resultat = rectangle_median($m, $c, $t, $n);
 
         // Stocker le résultat dans la session
         $_SESSION['resultat'] = $resultat;
+        $_SESSION['portee'] = $t;
 
         // Rediriger vers la page Modules.php
         header("Location: Modules.php");
