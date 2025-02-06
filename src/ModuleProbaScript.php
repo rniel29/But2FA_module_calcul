@@ -1,6 +1,6 @@
 <?php
 
-require ("src/Modules.html");
+require("src/Modules.php");
 // Vérifier si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Récupération des valeurs du formulaire
@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($c > 0 && $n > 0) {
         // Appel de la fonction
         $resultat = rectangle_median($m, $c, $t, $n);
-        echo "<p>Résultat du calcul : " . number_format($resultat, 6) . "</p>";
+        header("location:Modules.php/?resultat=$resultat");
     } else {
         echo "<p>Erreur : Veuillez entrer des valeurs valides.</p>";
     }
@@ -35,7 +35,7 @@ function rectangle_median($m, $c, $t, $n) {
 }
 
 // Tests
-echo rectangle_median(0, 1, 1, 1000) . "\n";
+echo rectangle_median($m, $c, $t , $n) . "\n";
 echo rectangle_median(2, 3, 4, 10) . "\n";
 ?>
 
