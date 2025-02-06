@@ -1,32 +1,42 @@
 <?php
 
-if(isset($_POST['Calculer'],$_POST['moyenne'],$_POST['ecart_type'],$_POST['portee'],$_POST['pas'])){
-    $moyenne=$_POST['moyenne'];
-    $ecart_type=$_POST['ecart_type'];
-    $portee=$_POST['portee'];
-    $pas=$_POST['pas'];
-    if($ecart_type=>0 && $pas<19000000){
-        echo 'alert("nope")';
+require ("src/Modules.html");
+// Vérifier si le formulaire a été soumis
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Récupération des valeurs du formulaire
+    $m = isset($_POST['moyenne']) ? floatval($_POST['moyenne']) : 0;
+    $c = isset($_POST['ecart_type']) ? floatval($_POST['ecart_type']) : 1;
+    $t = isset($_POST['portee']) ? floatval($_POST['portee']) : 1;
+    $n = isset($_POST['pas']) ? intval($_POST['pas']) : 1000;
+
+    // Vérifier que les valeurs sont valides
+    if ($c > 0 && $n > 0) {
+        // Appel de la fonction
+        $resultat = rectangle_median($m, $c, $t, $n);
+        echo "<p>Résultat du calcul : " . number_format($resultat, 6) . "</p>";
+    } else {
+        echo "<p>Erreur : Veuillez entrer des valeurs valides.</p>";
     }
 }
+function rectangle_median($m, $c, $t, $n) {
+    $a = 0;  // borne inférieure
+    $b = $t; // borne supérieure
+    $h = ($b - $a) / $n; // calcul de h
 
-
-function rectangleMedian($n) {
-    $a = 0;
-    $b = 1;
-    $h = ($b - $a) / $n;
-    $somme = 0;
+    $somme = 0; // variable pour effectuer la somme des points médians
 
     for ($i = 0; $i < $n; $i++) {
-        $milieu = $a + ($i + 0.5) * $h;
-        $f_milieu = $milieu * $milieu; // Fonction f(x) = x^2
-        $somme += $f_milieu;
+        $x = $a + ($i + 0.5) * $h; // calcul d'un point médian
+        $formule = ($c / sqrt(2 * M_PI * $c)) * (exp(-0.5 * pow(($x - $m) / $c, 2))); // fonction densité écrite en PHP
+        $somme += $formule;
     }
 
-    return $somme * $h;
+    return $somme * $h + 0.5; // Ajout du 0.5 afin de prendre en compte les valeurs présentes entre -infini et 0
 }
 
-$n = 100; // Nombre de subdivisions
-$resultat = rectangleMedian($n);
-echo "Approximation de l'intégrale de f(x) = x² avec n=$n : $resultat";
+// Tests
+echo rectangle_median(0, 1, 1, 1000) . "\n";
+echo rectangle_median(2, 3, 4, 10) . "\n";
+?>
+
 ?>
