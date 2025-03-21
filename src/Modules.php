@@ -44,7 +44,7 @@ session_start(); // Démarre la session pour accéder aux variables de session
             <input type="number" id="portee" name="portee" placeholder="t" required>
 
             <label for="pas">Nombre de rectangles</label>
-            <input type="number" id="pas" name="pas" max="20000" placeholder="Nb de rectangles < 20 000" required>
+            <input type="number" id="pas" name="pas" min="1" max="20000" placeholder="Nb de rectangles < 20 000" required>
 
             <div class="div_Btn_mod"><input type="submit" class="Btn_calc" value="Calculer"></div>
         </form>
