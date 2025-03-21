@@ -56,7 +56,7 @@ session_start(); // Démarre la session pour accéder aux variables de session
             <?php
             // Afficher le résultat s'il existe
             if (isset($_SESSION['resultat'])) {
-                echo "<p class='resultat'>Probabilité de P(X<=  " .$_SESSION['portee'].") :" .$_SESSION['resultat'].  "</p>";
+                echo "<p class='resultat'>$$ P(X \leq  " .$_SESSION['portee'].") =" .$_SESSION['resultat']."$$</p>";
                 // Supprimer le résultat après l'affichage
                 unset($_SESSION['resultat']);
             } elseif (isset($_SESSION['error_message'])) {
