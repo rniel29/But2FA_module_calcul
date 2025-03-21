@@ -11,7 +11,7 @@
         <header>
             <div class="header">
                 <img class="logo" src="Images/Logo.png" alt="Logo du site web">
-                <h1>Modul∈Calcul</h1>
+                <h1><a class="Acc" href="Accueil_Membre.php">Modul∈Calcul</a></h1>
                 <div class="buttons">
                     <button class="Btn_acc" onclick="location.href='Inscription.html'">Inscription</button>
                 </div>
