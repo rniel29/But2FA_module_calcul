@@ -9,6 +9,10 @@ session_start(); // Démarre la session pour accéder aux variables de session
     <link rel="icon" href="Images/Logo.png">
     <meta charset="UTF-8">
     <link href="css/style.css" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
 </head>
 <body>
 <header>
@@ -26,7 +30,7 @@ session_start(); // Démarre la session pour accéder aux variables de session
 <div class="Div_mod">
     <div class="mod1">
         <h1>Méthode des rectangles médian</h1>
-        <img class="Img_rect" src="Images/Formule_Rect_Med.png" alt="Formule Rectangle Médian">
+        <p>\( E = mc^2 \)</p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium repellendus molestias error consequatur voluptatum dicta officia qui id in voluptatem at maiores ad porro earum, tempora sit quia autem aliquam!</p>
 
         <form method="post" action="ModuleProbaScript.php" class="mod1">
