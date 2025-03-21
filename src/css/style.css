@@ -55,8 +55,8 @@ html,body{
 
 
 .div_Btn_mod{
+    justify-content: space-around;
     display: flex;
-    justify-content: center;
     margin-right: 5%;
 }
 

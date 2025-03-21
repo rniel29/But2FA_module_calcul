@@ -15,13 +15,18 @@
                 <img class = "logo" src="Images/Logo.png" alt="Logo du site web">
                 <h1><a class="Acc" href="Accueil_Membre.php">Modul∈Calcul</a></h1>
                 <div class="buttons">
-                    <button class="Btn_acc" onclick="location.href='index.html'">Déconnexion</button>
+                    <button class="Btn_acc" onclick="location.href='index.php'">Déconnexion</button>
                 </div>
             </div>
         </header>
 
         <main>
-            <div class="div_Btn_mod"><button class="Btn_mod" onclick="location.href='Modules.php'">Modules</button></div>
+
+            <div class="div_Btn_mod">
+                <button class="Btn_mod" onclick="location.href='Modules.php'">Loi normale</button>
+                <button class="Btn_mod" onclick="location.href='Cryptographie.php'">Cryptographie</button>
+                <button class="Btn_mod" onclick="location.href='Maths.php'">Maths</button>
+            </div>
 
             <div class="center_acc">
 
