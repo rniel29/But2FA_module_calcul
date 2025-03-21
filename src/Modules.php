@@ -35,16 +35,16 @@ session_start(); // Démarre la session pour accéder aux variables de session
 
         <form method="post" action="ModuleProbaScript.php" class="mod1">
             <label for="moyenne">Moyenne</label>
-            <input type="text" id="moyenne" name="moyenne" placeholder="m" required>
+            <input type="number" id="moyenne" name="moyenne" placeholder="m" required>
 
             <label for="ecart_type">Écart type</label>
-            <input type="text" id="ecart_type" name="ecart_type" placeholder="ecart type > 0" required>
+            <input type="number" id="ecart_type" name="ecart_type" min="0" placeholder="ecart type > 0" required>
 
             <label for="portee">Portée</label>
-            <input type="text" id="portee" name="portee" placeholder="t" required>
+            <input type="number" id="portee" name="portee" placeholder="t" required>
 
             <label for="pas">Nombre de rectangles</label>
-            <input type="text" id="pas" name="pas" placeholder="Nb de rectangles < 20 000" required>
+            <input type="number" id="pas" name="pas" max="20000" placeholder="Nb de rectangles < 20 000" required>
 
             <div class="div_Btn_mod"><input type="submit" class="Btn_calc" value="Calculer"></div>
         </form>
