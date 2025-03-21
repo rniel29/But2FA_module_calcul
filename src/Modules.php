@@ -30,7 +30,7 @@ session_start(); // Démarre la session pour accéder aux variables de session
 <div class="Div_mod">
     <div class="mod1">
         <h1>Méthode des rectangles médian</h1>
-        <p>\( E = mc^2 \)</p>
+        <p>$$x = \frac{c}{\sqrt{2 \pi c}} e^{-\frac{1}{2} \left( \frac{x - m}{c} \right)^2}$$</p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium repellendus molestias error consequatur voluptatum dicta officia qui id in voluptatem at maiores ad porro earum, tempora sit quia autem aliquam!</p>
 
         <form method="post" action="ModuleProbaScript.php" class="mod1">
