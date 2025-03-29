@@ -34,7 +34,7 @@ session_start(); // Démarre la session pour accéder aux variables de session
     <div class="mod1">
         <h1>Méthode des rectangles médian</h1>
         <p>$$x = \frac{c}{\sqrt{2 \pi c}} e^{-\frac{1}{2} \left( \frac{x - m}{c} \right)^2}$$</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium repellendus molestias error consequatur voluptatum dicta officia qui id in voluptatem at maiores ad porro earum, tempora sit quia autem aliquam!</p>
+        <p>Moyenne (𝑚) : Centre de la distribution.<br>Portée : Différence entre le max et le min (indicateur de dispersion).<br>Écart-type (𝑐) : Largeur de la distribution normale.<br>Nombre de rectangles : Plus il est grand, plus l'approximation est précise avec la technique des rectangles médiants.</p>
 
         <form method="post" action="ModuleProbaScript.php" class="mod1">
             <label for="moyenne">Moyenne</label>
