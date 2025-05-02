@@ -14,7 +14,7 @@
                 <img class="logo" src="Images/Logo.png" alt="Logo du site web">
                 <h1><a class="Acc" href="index.php">Modul∈Calcul</a></h1>
                 <div class="buttons">
-                    <button class="Btn_acc" onclick="location.href='Connexion.html'">Connexion</button>
+                    <button class="Btn_acc" onclick="location.href='Connexion.php'">Connexion</button>
                 </div>
             </div>
         </header>
