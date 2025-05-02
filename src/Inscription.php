@@ -1,3 +1,38 @@
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Connexion a la base
+    $host = 'localhost';
+    $dbname = 'sae';
+    $user = '';
+    $pass = '';
+
+    try {
+        $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $pass);
+    } catch (PDOException $e) {
+        die("Erreur de connexion : " . $e->getMessage());
+    }
+
+    $identifiant = $_POST['identifiant'] ?? '';
+    $mot_de_passe = $_POST['passwd'] ?? '';
+
+    // Verifie si l'identifiant existe deja
+    $check = $pdo->prepare("SELECT id FROM utilisateurs WHERE identifiant = :identifiant");
+    $check->bindParam(':identifiant', $identifiant);
+    $check->execute();
+
+    if ($check->rowCount() > 0) {
+        $message = "Identifiant deja utilise.";
+    } else {
+        $mot_de_passe_hash = password_hash($mot_de_passe, PASSWORD_DEFAULT);
+
+        $stmt = $pdo->prepare("INSERT INTO utilisateurs (identifiant, mot_de_passe) VALUES (:identifiant, :mot_de_passe)");
+        $stmt->bindParam(':identifiant', $identifiant);
+        $stmt->bindParam(':mot_de_passe', $mot_de_passe_hash);
+
+        $message = $stmt->execute() ? "Inscription reussie." : "Erreur lors de l'inscription.";
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -23,7 +58,7 @@
             <div class="center">
                 <div class="Formul_Inscript"><h1>Inscription</h1></div>
                 <br>
-                <form class="Formulaire">
+                <form class="Formulaire" method="POST" action="">
                     <div class="Titre_Formulaire"></div>
                     <h2>Identifiant</h2>
                     <label for="identifiant"></label>
@@ -42,7 +77,7 @@
                 <ul class="sans-puces">
                     <li>KOUNDI Maryam</li>
                     <li>NIEL Ronan</li>
-                    <li>BELOT Hervé</li>
+                    <li>BELOT Herve</li>
                 </ul>
             </div>
         </footer>
