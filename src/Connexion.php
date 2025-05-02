@@ -13,7 +13,7 @@
                 <img class="logo" src="Images/Logo.png" alt="Logo du site web">
                 <h1><a class="Acc" href="Accueil_Membre.php">Modul∈Calcul</a></h1>
                 <div class="buttons">
-                    <button class="Btn_acc" onclick="location.href='Inscription.html'">Inscription</button>
+                    <button class="Btn_acc" onclick="location.href='Inscription.php'">Inscription</button>
                 </div>
             </div>
         </header>
@@ -31,7 +31,7 @@
                     <label class="input_pswd" for="mot_de_passe"></label>
                     <input type="password" id ="mot_de_passe" name= "passwd">
                 </form>
-                <input class="Btn_Form_Co" type="submit" name="connexion" value="Se connecter" onclick="location.href='Admin_Web.html'" >
+                <input class="Btn_Form_Co" type="submit" name="connexion" value="Se connecter" onclick="location.href='Admin_Web.php'" >
             </div>
         </main>
 
