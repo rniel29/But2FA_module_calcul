@@ -17,12 +17,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['resultat'] = $resultat;
         $_SESSION['portee'] = $t;
 
-        // Rediriger vers la page Modules.php
-        header("Location: Modules.php");
+        // Rediriger vers la page modules.php
+        header("Location: modules.php");
         exit; // Important pour stopper l'exécution du script
     } else {
         $_SESSION['error_message'] = "Erreur : Veuillez entrer des valeurs valides.";
-        header("Location: Modules.php");
+        header("Location: modules.php");
         exit;
     }
 }

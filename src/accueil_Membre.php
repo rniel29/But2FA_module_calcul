@@ -13,8 +13,8 @@
         <header>
             <div class="header">
                 <img class = "logo" src="Images/Logo.png" alt="Logo du site web">
-                <h1><a class="Acc" href="Accueil_Membre.php">Modul∈Calcul</a></h1>
-                <form method="post" action="DeconnexionScript.php">
+                <h1><a class="Acc" href="accueil_Membre.php">Modul∈Calcul</a></h1>
+                <form method="post" action="deconnexionScript.php">
                     <div class="buttons">
                         <button class="Btn_acc" onclick="location.href='index.php'" name="DeconnexionScript">Déconnexion</button>
                     </div>
@@ -25,9 +25,9 @@
         <main>
 
             <div class="div_Btn_mod">
-                <button class="Btn_mod" onclick="location.href='Modules.php'">Loi normale</button>
-                <button class="Btn_mod" onclick="location.href='Cryptographie.php'">Cryptographie</button>
-                <button class="Btn_mod" onclick="location.href='Maths.php'">Maths</button>
+                <button class="Btn_mod" onclick="location.href='modules.php'">Loi normale</button>
+                <button class="Btn_mod" onclick="location.href='cryptographie.php'">Cryptographie</button>
+                <button class="Btn_mod" onclick="location.href='maths.php'">Maths</button>
             </div>
 
             <div class="center_acc">

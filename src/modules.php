@@ -18,8 +18,8 @@ session_start(); // Démarre la session pour accéder aux variables de session
 <header>
     <div class="header">
         <img class="logo" src="Images/Logo.png" alt="Logo du site web">
-        <h1><a class="Acc" href="Accueil_Membre.php">Modul∈Calcul</a></h1>
-        <form method="post" action="DeconnexionScript.php">
+        <h1><a class="Acc" href="accueil_Membre.php">Modul∈Calcul</a></h1>
+        <form method="post" action="deconnexionScript.php">
             <div class="buttons">
                 <button class="Btn_acc" onclick="location.href='index.php'" name="DeconnexionScript">Déconnexion</button>
             </div>
@@ -28,9 +28,9 @@ session_start(); // Démarre la session pour accéder aux variables de session
 </header>
 
 <div class="div_Btn_mod">
-    <button class="Btn_mod" onclick="location.href='Modules.php'">Loi normale</button>
-    <button class="Btn_mod" onclick="location.href='Cryptographie.php'">Cryptographie</button>
-    <button class="Btn_mod" onclick="location.href='Maths.php'">Maths</button>
+    <button class="Btn_mod" onclick="location.href='modules.php'">Loi normale</button>
+    <button class="Btn_mod" onclick="location.href='cryptographie.php'">Cryptographie</button>
+    <button class="Btn_mod" onclick="location.href='maths.php'">Maths</button>
 </div>
 <div class="Div_mod">
     <div class="mod1">
@@ -38,7 +38,7 @@ session_start(); // Démarre la session pour accéder aux variables de session
         <p>$$x = \frac{c}{\sqrt{2 \pi c}} e^{-\frac{1}{2} \left( \frac{x - m}{c} \right)^2}$$</p>
         <p>Moyenne (𝑚) : Centre de la distribution.<br>Portée : Différence entre le max et le min (indicateur de dispersion).<br>Écart-type (𝑐) : Largeur de la distribution normale.<br>Nombre de rectangles : Plus il est grand, plus l'approximation est précise avec la technique des rectangles médiants.</p>
 
-        <form method="post" action="ModuleProbaScript.php" class="mod1">
+        <form method="post" action="moduleProbaScript.php" class="mod1">
             <label for="moyenne">Moyenne</label>
             <input type="number" id="moyenne" name="moyenne" placeholder="m" required>
 
