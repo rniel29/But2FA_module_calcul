@@ -19,9 +19,11 @@ session_start(); // Démarre la session pour accéder aux variables de session
     <div class="header">
         <img class="logo" src="Images/Logo.png" alt="Logo du site web">
         <h1><a class="Acc" href="Accueil_Membre.php">Modul∈Calcul</a></h1>
-        <div class="buttons">
-            <button class="Btn_acc" onclick="location.href='index.php'">Déconnexion</button>
-        </div>
+        <form method="post" action="DeconnexionScript.php">
+            <div class="buttons">
+                <button class="Btn_acc" onclick="location.href='index.php'" name="DeconnexionScript">Déconnexion</button>
+            </div>
+        </form>
     </div>
 </header>
 
