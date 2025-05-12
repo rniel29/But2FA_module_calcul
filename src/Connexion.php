@@ -1,3 +1,51 @@
+<?php
+session_start();
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+// Connexion a la base
+    $host = 'localhost';
+    $dbname = 'sae';
+    $user = '';
+    $pass = '';
+
+    try {
+        $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $pass);
+    } catch (PDOException $e) {
+        die("Erreur de connexion : " . $e->getMessage());
+    }
+
+    $identifiant = $_POST['identifiant'] ?? '';
+    $mot_de_passe = $_POST['passwd'] ?? '';
+
+    $check = $pdo->prepare("SELECT id FROM utilisateurs WHERE identifiant = :identifiant and mot_de_passe = :mot_de_passe");
+    $check->bindParam(':identifiant', $identifiant);
+    $check->bindParam(':mot_de_passe', $mot_de_passe);
+    $check->execute();
+
+    if ($check->rowCount() > 0) {
+        if ($identifiant == 'adminweb' && $mot_de_passe == 'adminweb'){
+            session_start();
+            $_SESSION['identifiant'] = $identifiant;
+            $_SESSION['mot_de_passe'] = md5($mot_de_passe);
+            header('location: Admin_Web.php');
+        }
+        elseif ($identifiant == 'adminsysteme' && $mot_de_passe == 'adminsysteme'){
+            session_start();
+            $_SESSION['identifiant'] = $identifiant;
+            $_SESSION['mot_de_passe'] = md5($mot_de_passe);
+            header('location: Admin_Systeme.php');
+        }
+        else{
+            session_start();
+            $_SESSION['identifiant'] = $identifiant;
+            $_SESSION['mot_de_passe'] = md5($mot_de_passe);
+            header('Location: Modules.php');
+        }
+    } else {
+        $message = "L'utilisateur n'existe pas ou mot de passe incorrect !";
+    }
+
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
     <head>
