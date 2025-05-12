@@ -1,11 +1,12 @@
 <?php
-$captcha="azertyuiopmlkjgfdsqwxcvbn135469872?;.:/!";
-$captcha =str_shuffle($captcha);
-$captcha=substr($captcha,0,6);
+$captcha = "azertyuiopmlkjgfdsqwxcvbn135469872?;.:/!";
+$captcha = str_shuffle($captcha);
+$captcha = substr($captcha, 0, 6);
 session_start();
-$cook=setcookie("captcha",$captcha,time()+(60*60*24),"/");
+$cook = setcookie("captcha", $captcha, time() + (60 * 60 * 24), "/");
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Connexion a la base
+    // Connexion à la base
     $host = 'localhost';
     $dbname = 'sae';
     $user = '';
@@ -20,21 +21,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $identifiant = $_POST['identifiant'] ?? '';
     $mot_de_passe = $_POST['passwd'] ?? '';
     $captcha2 = $_POST['captcha'];
-    // Verifie si l'identifiant existe deja
+
+    // Vérifie si l'identifiant existe déjà
     $check = $pdo->prepare("SELECT id FROM utilisateurs WHERE identifiant = :identifiant");
     $check->bindParam(':identifiant', $identifiant);
     $check->execute();
 
     if ($check->rowCount() > 0) {
-        $message = "Identifiant deja utilise.";
+        $message = "Identifiant déjà utilisé.";
     } else {
-        $mot_de_passe_hash = password_hash($mot_de_passe, PASSWORD_DEFAULT);
+        // Vérifie si le captcha est correct
+        if ($captcha2 == $_COOKIE['captcha']) {
+            $mot_de_passe_hash = password_hash($mot_de_passe, PASSWORD_DEFAULT);
 
-        $stmt = $pdo->prepare("INSERT INTO utilisateurs (identifiant, mot_de_passe) VALUES (:identifiant, :mot_de_passe)");
-        $stmt->bindParam(':identifiant', $identifiant);
-        $stmt->bindParam(':mot_de_passe', $mot_de_passe_hash);
+            $stmt = $pdo->prepare("INSERT INTO user (identifiant, mot_de_passe) VALUES (:identifiant, :mot_de_passe)");
+            $stmt->bindParam(':identifiant', $identifiant);
+            $stmt->bindParam(':mot_de_passe', $mot_de_passe_hash);
 
-        $message = $stmt->execute() ? "Inscription reussie." : "Erreur lors de l'inscription.";
+            if ($stmt->execute()) {
+                header("Location: connexion.php");
+                exit(); 
+            } else {
+                $message = "Erreur lors de l'inscription.";
+            }
+        } else {
+            $message = "Captcha incorrect.";
+        }
     }
 }
 ?>
