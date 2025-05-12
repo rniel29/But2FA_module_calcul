@@ -14,14 +14,14 @@
                 <img class = "logo" src="Images/Logo.png" alt="Logo du site web">
                 <h1><a class="Acc" href="index.php">Modul∈Calcul</a></h1>
                 <div class="buttons">
-                    <button class="Btn_acc" onclick="location.href='Connexion.php'">Connexion</button>
-                    <button class="Btn_acc" onclick="location.href='Inscription.php'">Inscription</button>
+                    <button class="Btn_acc" onclick="location.href='connexion.php'">Connexion</button>
+                    <button class="Btn_acc" onclick="location.href='inscription.php'">Inscription</button>
                 </div>
             </div>
         </header>
 
         <main>
-            <div class="div_Btn_mod"><button class="Btn_mod" onclick="location.href='Modules.php'">Modules</button></div>
+            <div class="div_Btn_mod"><button class="Btn_mod" onclick="location.href='modules.php'">Modules</button></div>
 
             <div class="center_acc">
                 <div id="ratio">
