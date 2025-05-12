@@ -1,4 +1,9 @@
 <?php
+$captcha="azertyuiopmlkjgfdsqwxcvbn135469872?;.:/!";
+$captcha =str_shuffle($captcha);
+$captcha=substr($captcha,0,6);
+session_start();
+$cook=setcookie("captcha",$captcha,time()+(60*60*24),"/");
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Connexion a la base
     $host = 'localhost';
@@ -14,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $identifiant = $_POST['identifiant'] ?? '';
     $mot_de_passe = $_POST['passwd'] ?? '';
-
+    $captcha2 = $_POST['captcha'];
     // Verifie si l'identifiant existe deja
     $check = $pdo->prepare("SELECT id FROM utilisateurs WHERE identifiant = :identifiant");
     $check->bindParam(':identifiant', $identifiant);
@@ -66,6 +71,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <h2>Mot de passe</h2>
                     <label class="input_pswd" for="mot_de_passe"></label>
                     <input type="password" id ="mot_de_passe" name= "passwd">
+                    <label>Captcha</label>
+                    <label><?php $captcha?></label>
+                    <input type='text' name='captcha' placeholder='Captcha'>
                 </form>
                 <input class="Btn_Form_Co" type="submit" name="inscription" value="S'inscrire">
             </div>
