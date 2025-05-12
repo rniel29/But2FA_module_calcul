@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <label class="input_pswd" for="mot_de_passe"></label>
                     <input type="password" id ="mot_de_passe" name= "passwd">
                     <label>Captcha</label>
-                    <label><?php $captcha?></label>
+                    <label><?php echo "$captcha"?></label>
                     <input type='text' name='captcha' placeholder='Captcha'>
                 </form>
                 <input class="Btn_Form_Co" type="submit" name="inscription" value="S'inscrire">
