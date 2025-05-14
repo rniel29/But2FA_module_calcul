@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $identifiant = $_POST['identifiant'] ?? '';
     $mot_de_passe = $_POST['passwd'] ?? '';
 
-    $check = $pdo->prepare("SELECT id FROM user WHERE 'login' = :identifiant and 'password' = :mot_de_passe");
+    $check = $pdo->prepare("SELECT id FROM user WHERE login = :identifiant and password = :mot_de_passe");
     $check->bindParam(':identifiant', $identifiant);
     $check->bindParam(':mot_de_passe', $mot_de_passe);
     $check->execute();
