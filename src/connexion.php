@@ -5,8 +5,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Connexion à la base de données avec MySQLi
     $host = 'localhost';
     $dbname = 'sae';
-    $user = '';
-    $pass = '';
+    $user = 'admin';
+    $pass = 'admin';
 
     $conn = new mysqli($host, $user, $pass, $dbname);
 
