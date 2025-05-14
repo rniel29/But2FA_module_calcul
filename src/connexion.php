@@ -28,10 +28,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['identifiant'] = $identifiant;
         $_SESSION['mot_de_passe'] = md5($mot_de_passe);
 
-        if ($identifiant == 'adminweb' && $mot_de_passe == 'adminweb') {
-            header('Location: admin_Web.php');
-            exit();
-        } elseif ($identifiant == 'adminsysteme' && $mot_de_passe == 'adminsysteme') {
+    if ($identifiant == 'adminweb' && $mot_de_passe == 'adminweb') {
+        $_SESSION['identifiant'] = $identifiant;
+        $_SESSION['mot_de_passe'] = md5($mot_de_passe); 
+        header('Location: admin_Web.php');
+        exit(); 
+
+} elseif ($identifiant == 'adminsysteme' && $mot_de_passe == 'adminsysteme') {
             header('Location: admin_Systeme.php');
             exit();
         } else {
