@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $identifiant = $_POST['identifiant'] ?? '';
     $mot_de_passe = $_POST['passwd'] ?? '';
 
-    $check = $pdo->prepare("SELECT id FROM utilisateurs WHERE identifiant = :identifiant and mot_de_passe = :mot_de_passe");
+    $check = $pdo->prepare("SELECT id FROM user WHERE 'login' = :identifiant and 'password' = :mot_de_passe");
     $check->bindParam(':identifiant', $identifiant);
     $check->bindParam(':mot_de_passe', $mot_de_passe);
     $check->execute();
@@ -26,19 +26,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             session_start();
             $_SESSION['identifiant'] = $identifiant;
             $_SESSION['mot_de_passe'] = md5($mot_de_passe);
-            header('location: Admin_Web.php');
+            header('location: admin_Web.php');
         }
         elseif ($identifiant == 'adminsysteme' && $mot_de_passe == 'adminsysteme'){
             session_start();
             $_SESSION['identifiant'] = $identifiant;
             $_SESSION['mot_de_passe'] = md5($mot_de_passe);
-            header('location: Admin_Systeme.php');
+            header('location: admin_Systeme.php');
         }
         else{
             session_start();
             $_SESSION['identifiant'] = $identifiant;
             $_SESSION['mot_de_passe'] = md5($mot_de_passe);
-            header('Location: Modules.php');
+            header('Location: modules.php');
         }
     } else {
         $message = "L'utilisateur n'existe pas ou mot de passe incorrect !";
