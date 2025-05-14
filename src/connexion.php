@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="center">
                 <div class="Formul_Inscript"><h1>Connexion</h1></div>
                 <br>
-                <form class="Formulaire">
+                <form class="Formulaire" methode="post" action=''>
                     <div class="Titre_Formulaire"></div>
                     <h2>Identifiant</h2>
                     <label for="identifiant"></label>
