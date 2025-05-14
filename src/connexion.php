@@ -27,21 +27,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['identifiant'] = $identifiant;
             $_SESSION['mot_de_passe'] = md5($mot_de_passe);
             header('location: admin_Web.php');
+            echo"<p>1</p>";
         }
         elseif ($identifiant == 'adminsysteme' && $mot_de_passe == 'adminsysteme'){
             session_start();
             $_SESSION['identifiant'] = $identifiant;
             $_SESSION['mot_de_passe'] = md5($mot_de_passe);
             header('location: admin_Systeme.php');
+            echo"<p>2</p>";
         }
         else{
             session_start();
             $_SESSION['identifiant'] = $identifiant;
             $_SESSION['mot_de_passe'] = md5($mot_de_passe);
             header('Location: modules.php');
+            echo"<p>3</p>";
         }
     } else {
-        console.log($message = "L'utilisateur n'existe pas ou mot de passe incorrect !");
+        $message = "L'utilisateur n'existe pas ou mot de passe incorrect !";
+        echo"<p>$message</p>";
     }
 
 }
