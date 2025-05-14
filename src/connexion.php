@@ -28,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['identifiant'] = $identifiant;
         $_SESSION['mot_de_passe'] = md5($mot_de_passe);
 
+<<<<<<< HEAD
     if ($identifiant == 'adminweb' && $mot_de_passe == 'adminweb') {
         $_SESSION['identifiant'] = $identifiant;
         $_SESSION['mot_de_passe'] = md5($mot_de_passe); 
@@ -35,6 +36,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit(); 
 
 } elseif ($identifiant == 'adminsysteme' && $mot_de_passe == 'adminsysteme') {
+=======
+        if ($identifiant === 'adminweb') {
+            header('Location: admin_web2.php');
+        } elseif ($identifiant === 'adminsysteme') {
+>>>>>>> 323298c05b1616f866a33722cdc4bac0dd074f58
             header('Location: admin_Systeme.php');
             exit();
         } else {
