@@ -27,7 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['identifiant'] = $identifiant;
             $_SESSION['mot_de_passe'] = md5($mot_de_passe);
             header('location: admin_Web.php');
-            echo"<p>1</p>";
         }
         elseif ($identifiant == 'adminsysteme' && $mot_de_passe == 'adminsysteme'){
             session_start();
@@ -74,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="center">
                 <div class="Formul_Inscript"><h1>Connexion</h1></div>
                 <br>
-                <form class="Formulaire" methode="POST" action=''>
+                <form class="Formulaire" method="POST" action=''>
                     <div class="Titre_Formulaire"></div>
                     <h2>Identifiant</h2>
                     <label for="identifiant"></label>
@@ -85,6 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input class="Btn_Form_Co" type="submit" name="connexion" value="Se connecter">
                 </form>
             </div>
+            <?php if (!empty($message)) echo "<p style='color:red; text-align:center;'>$message</p>"; ?>
         </main>
 
         <footer>
