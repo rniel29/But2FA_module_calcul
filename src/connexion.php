@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <label class="input_pswd" for="mot_de_passe"></label>
                     <input type="password" id ="mot_de_passe" name= "passwd">
                 </form>
-                <input class="Btn_Form_Co" type="submit" name="connexion" value="Se connecter" onclick="location.href='admin_Web.php'" >
+                <input class="Btn_Form_Co" type="submit" name="connexion" value="Se connecter" >
             </div>
         </main>
 
