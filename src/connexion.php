@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             header('Location: modules.php');
         }
     } else {
-        $message = "L'utilisateur n'existe pas ou mot de passe incorrect !";
+        console.log($message = "L'utilisateur n'existe pas ou mot de passe incorrect !");
     }
 
 }
