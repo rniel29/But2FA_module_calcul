@@ -2,12 +2,15 @@
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Connexion à la base de données avec MySQLi
     $host = 'localhost';
     $dbname = 'sae';
     $user = 'admin';
     $pass = 'admin';
 
     $conn = new mysqli($host, $user, $pass, $dbname);
+
+    // Vérifie la connexion
     if ($conn->connect_error) {
         die("Erreur de connexion : " . $conn->connect_error);
     }
@@ -15,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $identifiant = $_POST['identifiant'] ?? '';
     $mot_de_passe = $_POST['passwd'] ?? '';
 
+    // Préparer une requête sécurisée
     $stmt = $conn->prepare("SELECT id FROM user WHERE login = ? AND password = ?");
     $stmt->bind_param("ss", $identifiant, $mot_de_passe);
     $stmt->execute();
@@ -22,15 +26,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($stmt->num_rows > 0) {
         $_SESSION['identifiant'] = $identifiant;
+        $_SESSION['mot_de_passe'] = md5($mot_de_passe);
 
-        if ($identifiant === 'adminweb') {
-            header('Location: admin_Web.php');
-        } elseif ($identifiant === 'adminsysteme') {
+    if ($identifiant == 'adminweb' && $mot_de_passe == 'adminweb') {
+        $_SESSION['identifiant'] = $identifiant;
+        $_SESSION['mot_de_passe'] = md5($mot_de_passe); 
+        header('Location: admin_Web.php');
+        exit(); 
+
+} elseif ($identifiant == 'adminsysteme' && $mot_de_passe == 'adminsysteme') {
             header('Location: admin_Systeme.php');
+            exit();
         } else {
             header('Location: modules.php');
+            exit();
         }
-        exit(); 
     } else {
         $message = "L'utilisateur n'existe pas ou mot de passe incorrect !";
     }
@@ -39,7 +49,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $conn->close();
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="fr">
