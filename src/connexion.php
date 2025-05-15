@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $identifiant = $_POST['identifiant'] ?? '';
     $mot_de_passe = $_POST['passwd'] ?? '';
 
-    $stmt = $conn->prepare("SELECT id FROM user WHERE login = ? AND password = ?");
+    $stmt = $conn->prepare("SELECT login FROM user WHERE login = ? AND password = ?");
     $stmt->bind_param("ss", $identifiant, $mot_de_passe);
     $stmt->execute();
     $stmt->store_result();

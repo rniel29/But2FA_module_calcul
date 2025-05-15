@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $captcha2 = $_POST['captcha'];
 
     // Vérifie si l'identifiant existe déjà
-    $check = $pdo->prepare("SELECT id FROM utilisateurs WHERE identifiant = :identifiant");
+    $check = $pdo->prepare("SELECT login FROM user WHERE login = :identifiant");
     $check->bindParam(':identifiant', $identifiant);
     $check->execute();
 
@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($captcha2 == $_COOKIE['captcha']) {
             $mot_de_passe_hash = password_hash($mot_de_passe, PASSWORD_DEFAULT);
 
-            $stmt = $pdo->prepare("INSERT INTO user (identifiant, mot_de_passe) VALUES (:identifiant, :mot_de_passe)");
+            $stmt = $pdo->prepare("INSERT INTO user (login, password) VALUES (:identifiant, :mot_de_passe)");
             $stmt->bindParam(':identifiant', $identifiant);
             $stmt->bindParam(':mot_de_passe', $mot_de_passe_hash);
 
