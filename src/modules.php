@@ -72,6 +72,35 @@ session_start(); // Démarre la session pour accéder aux variables de session
         </div>
 
     </div>
+
+    <div class="historique">
+        <h2>Historique des derniers calculs</h2>
+        <ul>
+            <?php
+            $conn = new mysqli('localhost', 'admin', 'admin', 'sae');
+            if ($conn->connect_error) {
+                echo "<li>Erreur de connexion à la base de données.</li>";
+            } else {
+                $sql = "SELECT moyenne, ecart_type, portee, pas, resultat, date_calcul 
+                    FROM resultats 
+                    ORDER BY date_calcul DESC 
+                    LIMIT 5";
+                $result = $conn->query($sql);
+
+                if ($result && $result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<li>m={$row['moyenne']}, c={$row['ecart_type']}, t={$row['portee']}, n={$row['pas']} → P(X≤t) ≈ {$row['resultat']} (". $row['date_calcul'] .")</li>";
+                    }
+                } else {
+                    echo "<li>Aucun calcul enregistré.</li>";
+                }
+
+                $conn->close();
+            }
+            ?>
+        </ul>
+    </div>
+
 </div>
 
 <footer>
