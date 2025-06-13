@@ -1,25 +1,34 @@
 <?php
-session_start(); // Démarre la session
+session_start();
 
-// Vérifier si le formulaire a été soumis
+$host = 'localhost';
+$db   = 'sae';
+$user = 'admin';
+$pass = 'admin';
+
+$conn = new mysqli($host, $user, $pass, $db);
+if ($conn->connect_error) {
+    die("Connexion échouée : " . $conn->connect_error);
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $m = isset($_POST['moyenne']) ? floatval($_POST['moyenne']) : 0;//0
-    $c = isset($_POST['ecart_type']) ? floatval($_POST['ecart_type']) : 1;//
+    $m = isset($_POST['moyenne']) ? floatval($_POST['moyenne']) : 0;
+    $c = isset($_POST['ecart_type']) ? floatval($_POST['ecart_type']) : 1;
     $t = isset($_POST['portee']) ? floatval($_POST['portee']) : 1;
     $n = isset($_POST['pas']) ? intval($_POST['pas']) : 1000;
 
-    // Vérifier que les valeurs sont valides
-    if ($c > 0 && $n > 0 && $n<20000)  {
-        // Appel de la fonction pour calculer le résultat
+    if ($c > 0 && $n > 0 && $n < 20000) {
         $resultat = rectangle_median($m, $c, $t, $n);
 
-        // Stocker le résultat dans la session
+        $stmt = $conn->prepare("INSERT INTO resultats (moyenne, ecart_type, portee, pas, resultat) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("dddid", $m, $c, $t, $n, $resultat);
+        $stmt->execute();
+        $stmt->close();
+
         $_SESSION['resultat'] = $resultat;
         $_SESSION['portee'] = $t;
-
-        // Rediriger vers la page modules.php
         header("Location: modules.php");
-        exit; // Important pour stopper l'exécution du script
+        exit;
     } else {
         $_SESSION['error_message'] = "Erreur : Veuillez entrer des valeurs valides.";
         header("Location: modules.php");
@@ -28,18 +37,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 function rectangle_median($m, $c, $t, $n) {
-    $a = $m-5*$c;  // borne inférieure
-    $b = $t; // borne supérieure
-    $h = ($b - $a) / $n; // calcul de h
-
-    $somme = 0; // variable pour effectuer la somme des points médians
+    $a = $m - 5 * $c;
+    $b = $t;
+    $h = ($b - $a) / $n;
+    $somme = 0;
 
     for ($i = 0; $i < $n; $i++) {
-        $x = $a + ($i + 0.5) * $h; // calcul d'un point médian
-        $formule = ($c / sqrt(2 * M_PI * $c)) * (exp(-0.5 * pow(($x - $m) / $c, 2))); // fonction densité écrite en PHP
+        $x = $a + ($i + 0.5) * $h;
+        $formule = ($c / sqrt(2 * M_PI * $c)) * (exp(-0.5 * pow(($x - $m) / $c, 2)));
         $somme += $formule;
     }
 
-    return $somme * $h ;
+    return $somme * $h;
 }
 ?>
