@@ -23,12 +23,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->bind_param("ss", $identifiant, $mot_de_passe);
     $stmt->execute();
     $stmt->store_result();
-
-    if ($stmt->num_rows > 0) {
+ if ($stmt->num_rows > 0) {
         $_SESSION['identifiant'] = $identifiant;
 
         if ($identifiant === 'adminweb') {
-            header('Location: admin_web2.php');
+            header('Location: admin_web.php');
         } elseif ($identifiant === 'adminsysteme') {
             header('Location: admin_Systeme.php');
             exit();
