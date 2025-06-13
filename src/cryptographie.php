@@ -42,7 +42,7 @@ session_start(); // Démarre la session pour accéder aux variables de session
             <input type="text" id="mot_a_chiffrer" name="mot_a_chiffrer" placeholder="ex : perdu">
 
             <label for="dechiffrer">Mot à déchiffrer</label>
-            <input type="text" id="mot_a_dechiffrer" name="mot_a_dechiffrer" placeholder="ex : perdu">
+            <input type="text" id="mot_a_dechiffrer" name="mot_a_dechiffrer" placeholder="ex : GDADDDDVDX">
 
             <input type="submit" class="Btn_calc" value="Valider">
         </form>
