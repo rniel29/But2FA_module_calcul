@@ -34,24 +34,17 @@ session_start(); // Démarre la session pour accéder aux variables de session
 </div>
 <div class="Div_mod">
     <div class="mod1">
-        <h1>Méthode des rectangles médian</h1>
-        <p>$$x = \frac{c}{\sqrt{2 \pi c}} e^{-\frac{1}{2} \left( \frac{x - m}{c} \right)^2}$$</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium repellendus molestias error consequatur voluptatum dicta officia qui id in voluptatem at maiores ad porro earum, tempora sit quia autem aliquam!</p>
+        <h1>Système ADFGVX</h1>
+        <p>Le système ADFGVX est un moyen de chiffrer un message en utilisant une table spéciale. Chaque lettre ou chiffre du message est transformé en une paire de lettres parmi A, D, F, G, V, X pour cacher son contenu.</p>
 
-        <form method="post" action="moduleProbaScript.php" class="mod1">
-            <label for="moyenne">Moyenne</label>
-            <input type="number" id="moyenne" name="moyenne" placeholder="m" required>
+        <form method="post" action="calcul_crypto.php" class="mod1">
+            <label for="chiffrer">Mot à chiffrer</label>
+            <input type="text" id="mot_a_chiffrer" name="mot_a_chiffrer" placeholder="ex : perdu">
 
-            <label for="ecart_type">Écart type</label>
-            <input type="number" id="ecart_type" name="ecart_type" min="0" placeholder="ecart type > 0" required>
+            <label for="dechiffrer">Mot à déchiffrer</label>
+            <input type="text" id="mot_a_dechiffrer" name="mot_a_dechiffrer" placeholder="ex : perdu">
 
-            <label for="portee">Portée</label>
-            <input type="number" id="portee" name="portee" placeholder="t" required>
-
-            <label for="pas">Nombre de rectangles</label>
-            <input type="number" id="pas" name="pas" min="1" max="20000" placeholder="Nb de rectangles < 20 000" required>
-
-            <input type="submit" class="Btn_calc" value="Calculer">
+            <input type="submit" class="Btn_calc" value="Valider">
         </form>
 
 
@@ -59,11 +52,10 @@ session_start(); // Démarre la session pour accéder aux variables de session
 
         <div class="result">
             <?php
-            // Afficher le résultat s'il existe
-            if (isset($_SESSION['resultat'])) {
-                echo "<p class='resultat'>$$ P(X \leq  " .$_SESSION['portee'].") =" .$_SESSION['resultat']."$$</p>";
-                // Supprimer le résultat après l'affichage
-                unset($_SESSION['resultat']);
+
+            if (isset($_SESSION['resultat_crypto'])) {
+                echo "<p class='resultat'>Mot chiffré/déchiffré : <strong>" . $_SESSION['resultat_crypto'] . "</strong></p>";
+                unset($_SESSION['resultat_crypto']);
             } elseif (isset($_SESSION['error_message'])) {
                 echo "<p class='error'>" . $_SESSION['error_message'] . "</p>";
                 unset($_SESSION['error_message']);
