@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['identifiant'] = $identifiant;
 
         if ($identifiant === 'adminweb') {
-            header('Location: admin_web.php');
+            header('Location: admin_Web.php');
         } elseif ($identifiant === 'adminsysteme') {
             header('Location: admin_Systeme.php');
             exit();
