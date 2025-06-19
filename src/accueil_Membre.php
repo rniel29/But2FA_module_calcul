@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <?php
 session_start();
 
@@ -7,6 +7,7 @@ if (!isset($_SESSION['identifiant'])) {
     exit();
 }
 ?>
+<!DOCTYPE html>
 <html lang="fr">
     <head>
         <title>SAE - Accueil</title>
