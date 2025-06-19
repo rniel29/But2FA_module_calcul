@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <?php
 if (!isset($_SESSION['identifiant'])) {
     header('Location: index.php');
@@ -11,6 +11,7 @@ if ($_SESSION['identifiant'] !== 'adminweb') {
     exit();
 }
 ?>
+<!DOCTYPE html>
 <html lang="fr">
 
     <head>
