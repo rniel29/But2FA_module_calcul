@@ -24,18 +24,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
 
-    $mot_de_passe = $_POST['passwd'] ?? '';
-    $mot_de_passe_hash = md5($mot_de_passe);
+    if (empty($mot_de_passe)) {
+        $message = "Le mot de passe ne peut pas être vide.";
+    } else{
+        $mot_de_passe = $_POST['passwd'] ?? '';
+        $mot_de_passe_hash = md5($mot_de_passe);
 
-    $stmt = $conn->prepare("UPDATE user SET mot_de_passe = ? WHERE login = ?");
-    $stmt->bind_param("ss", $mot_de_passe_hash, $identifiant);
+        $stmt = $conn->prepare("UPDATE user SET mot_de_passe = ? WHERE login = ?");
+        if (!$stmt) {
+            die("Erreur de préparation : " . $conn->error);
+        }
+        $stmt->bind_param("ss", $mot_de_passe_hash, $identifiant);
 
-    if ($stmt->execute()) {
-        header("Location: modules.php");
-        exit();
-    } else {
-        $message = "Erreur lors de la mise à jour du mot de passe.";
+        if ($stmt->execute()) {
+            header("Location: modules.php");
+            exit();
+        } else {
+            $message = "Erreur lors de la mise à jour du mot de passe.";
+        }
     }
+    
 
 }
 
@@ -75,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <form class="Formulaire" method="POST" action=''>
                         <h2>Changer le mot de passe</h2>
                         <label class="input_pswd" for="mot_de_passe"> Nouveau mot de passe : </label>
-                        <input type="password" id ="mot_de_passe" name= "passwd">
+                        <input type="password" id ="mot_de_passe" name= "passwd" required>
                         <input class="Btn_Form_Co" type="submit" value="Valider">
                     </form>
                 </div>
