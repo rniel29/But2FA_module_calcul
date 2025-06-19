@@ -11,6 +11,12 @@ if ($conn->connect_error) {
     die("Connexion échouée : " . $conn->connect_error);
 }
 
+if(!isset($_SESSION['user_id'])){
+    die("Erreur : l'utilisateur est non connecté.");
+}
+
+$user_id = $_SESSION['user_id'];
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $m = isset($_POST['moyenne']) ? floatval($_POST['moyenne']) : 0;
     $c = isset($_POST['ecart_type']) ? floatval($_POST['ecart_type']) : 1;
@@ -20,8 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($c > 0 && $n > 0 && $n < 20000) {
         $resultat = rectangle_median($m, $c, $t, $n);
 
-        $stmt = $conn->prepare("INSERT INTO resultats (moyenne, ecart_type, portee, pas, resultat) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("dddid", $m, $c, $t, $n, $resultat);
+        $stmt = $conn->prepare("INSERT INTO resultats (user_id, moyenne, ecart_type, portee, pas, resultat) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("idddid", $user_id,$m, $c, $t, $n, $resultat);
         $stmt->execute();
         $stmt->close();
 
