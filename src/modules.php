@@ -34,7 +34,6 @@ if (!isset($_SESSION['identifiant'])) {
 <div class="div_Btn_mod">
     <button class="Btn_mod" onclick="location.href='modules.php'">Loi normale</button>
     <button class="Btn_mod" onclick="location.href='cryptographie.php'">Cryptographie</button>
-    <button class="Btn_mod" onclick="location.href='maths.php'">Maths</button>
 </div>
 <div class="Div_mod">
     <div class="mod1">
@@ -80,28 +79,41 @@ if (!isset($_SESSION['identifiant'])) {
     <div class="historique">
         <h2>Historique des derniers calculs</h2>
         <ul>
-            <?php
+        <?php
+        if (!isset($_SESSION['user_id'])) {
+            echo "<p class='error'>Erreur : utilisateur non connecté.</p>";
+        } else {
+            $user_id = $_SESSION['user_id'];
             $conn = new mysqli('localhost', 'admin', 'admin', 'sae');
             if ($conn->connect_error) {
                 echo "<li>Erreur de connexion à la base de données.</li>";
             } else {
                 $sql = "SELECT moyenne, ecart_type, portee, pas, resultat, date_calcul 
-                    FROM resultats 
-                    ORDER BY date_calcul DESC 
-                    LIMIT 5";
-                $result = $conn->query($sql);
+                        FROM resultats 
+                        WHERE user_id = ? 
+                        ORDER BY date_calcul DESC 
+                        LIMIT 5";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("i", $user_id);
+                $stmt->execute();
+                $result = $stmt->get_result();
 
+                echo "<div class='historique'><h2>Ton historique</h2><ul>";
                 if ($result && $result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
-                        echo "<li>m={$row['moyenne']}, c={$row['ecart_type']}, t={$row['portee']}, n={$row['pas']} → P(X≤t) ≈ {$row['resultat']} (". $row['date_calcul'] .")</li>";
+                        echo "<li>m={$row['moyenne']}, c={$row['ecart_type']}, t={$row['portee']}, n={$row['pas']} → P(X≤t) ≈ {$row['resultat']} ({$row['date_calcul']})</li>";
                     }
                 } else {
                     echo "<li>Aucun calcul enregistré.</li>";
                 }
+                echo "</ul></div>";
 
+                $stmt->close();
                 $conn->close();
             }
-            ?>
+        }
+        ?>
+
         </ul>
     </div>
 

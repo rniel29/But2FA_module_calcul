@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <h2>Changer le mot de passe</h2>
                         <label class="input_pswd" for="mot_de_passe"> Nouveau mot de passe : </label>
                         <input type="password" id ="mot_de_passe" name= "passwd">
-                        <input class="Btn_Form_Co" type="submit" value="Changer le mot de passe">
+                        <input class="Btn_Form_Co" type="submit" value="Valider">
                     </form>
                 </div>
 

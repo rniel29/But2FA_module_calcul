@@ -19,19 +19,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $mot_de_passe = $_POST['passwd'] ?? '';
 
     // Préparer une requête sécurisée
-    $stmt = $conn->prepare("SELECT password FROM user WHERE login = ?");
+    $stmt = $conn->prepare("SELECT id,password FROM user WHERE login = ?");
     $stmt->bind_param("s", $identifiant);
     $stmt->execute();
     $stmt->store_result();
 
     if ($stmt->num_rows > 0) {
-        $stmt->bind_result($hash);
+        $stmt->bind_result($user_id,$hash);
         $stmt->fetch();
 
         // Vérification MD5
         if (md5($mot_de_passe) === $hash) {
             // Mot de passe correct
             $_SESSION['identifiant'] = $identifiant;
+            $_SESSION['user_id'] = $user_id;
+
 
             // Mise à jour date/heure et IP dernière connexion
             $ip = $_SERVER['REMOTE_ADDR'];
@@ -45,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($identifiant === 'adminweb') {
                 header('Location: admin_Web.php');
                 exit();
-            } elseif ($identifiant === 'adminsysteme') {
+            } elseif ($identifiant === 'sysadmin') {
                 header('Location: admin_Systeme.php');
                 exit();
             } else {
