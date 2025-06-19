@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 header('Location: admin_Systeme.php');
                 exit();
             } else {
-                header('Location: modules.php');
+                header('Location: acceuil_Membre.php');
                 exit();
             }
         } else {
