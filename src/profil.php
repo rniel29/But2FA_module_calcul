@@ -23,11 +23,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         die("Erreur de connexion : " . $conn->connect_error);
     }
 
-
+    $mot_de_passe = $_POST['passwd'] ?? '';
+    
     if (empty($mot_de_passe)) {
         $message = "Le mot de passe ne peut pas être vide.";
     } else{
-        $mot_de_passe = $_POST['passwd'] ?? '';
         $mot_de_passe_hash = md5($mot_de_passe);
 
         $stmt = $conn->prepare("UPDATE user SET password = ? WHERE login = ?");
