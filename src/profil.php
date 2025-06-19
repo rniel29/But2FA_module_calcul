@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <h1><a class="Acc" href="accueil_Membre.php">Modul∈Calcul</a></h1>
                 <form method="post" action="deconnexionScript.php">
                     <div class="buttons">
-                        <button class="Btn_acc" onclick="location.href='index.php'" name="DeconnexionScript">Déconnexion</button>
+                        <button class="Btn_acc" name="DeconnexionScript">Déconnexion</button>
                     </div>
                 </form>
             </div>
@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <h2>Changer le mot de passe</h2>
                         <label class="input_pswd" for="mot_de_passe"> Nouveau mot de passe : </label>
                         <input type="password" id ="mot_de_passe" name= "passwd">
-                        <input class="Btn_Form_Co" type="submit" name="connexion" value="Se connecter">
+                        <input class="Btn_Form_Co" type="submit" value="Valider">
                     </form>
                 </div>
 
