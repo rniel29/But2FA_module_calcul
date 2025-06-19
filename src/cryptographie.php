@@ -13,16 +13,19 @@ if (!isset($_SESSION['identifiant'])) {
     <link rel="icon" href="Images/Logo.png">
     <meta charset="UTF-8">
     <link href="css/style.css" rel="stylesheet">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-    </script>
 </head>
 <body>
 <header>
     <div class="header">
         <img class="logo" src="Images/Logo.png" alt="Logo du site web">
         <h1><a class="Acc" href="accueil_Membre.php">Modul∈Calcul</a></h1>
+
+        <form method="post" action="profil.php">
+            <div class="buttons">
+                <button class="Btn_acc" name="Profil">Profil</button>
+            </div>
+        </form>
+
         <form method="post" action="deconnexionScript.php">
             <div class="buttons">
                 <button class="Btn_acc" onclick="location.href='index.php'" name="DeconnexionScript">Déconnexion</button>
