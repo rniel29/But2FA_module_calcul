@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <?php
 if (!isset($_SESSION['identifiant'])) {
-    header('Location: login.php');
+    header('Location: index.php');
     exit();
 }
 
 // Exemple : Accès réservé à adminweb
 if ($_SESSION['identifiant'] !== 'sysadmin') {
-    header('Location: unauthorized.php'); // ou un message d’erreur
+    header('Location: index.php'); // ou un message d’erreur
     exit();
 }
 ?>

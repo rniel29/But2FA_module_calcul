@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php
 if (!isset($_SESSION['identifiant'])) {
-    header('Location: login.php');
+    header('Location: index.php');
     exit();
 }
 
