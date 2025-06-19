@@ -46,7 +46,7 @@ if (!isset($_SESSION['identifiant'])) {
             <input type="number" id="moyenne" name="moyenne" placeholder="m" required>
 
             <label for="ecart_type">Écart type</label>
-            <input type="number" id="ecart_type" name="ecart_type" min="0" placeholder="ecart type > 0" required>
+            <input type="number" id="ecart_type" name="ecart_type" min="0" placeholder="écart type > 0" required>
 
             <label for="portee">Portée</label>
             <input type="number" id="portee" name="portee" placeholder="t" required>
@@ -54,9 +54,14 @@ if (!isset($_SESSION['identifiant'])) {
             <label for="pas">Nombre de rectangles</label>
             <input type="number" id="pas" name="pas" min="1" max="20000" placeholder="Nb de rectangles < 20 000" required>
 
-            <input type="submit" class="Btn_calc" name="action" value="Calculer">
-            <input type="submit" class="Btn_calc" name="action" value="Enregistrer">
+            <label>
+                <input type="checkbox" name="enregistrer" value="1">
+                Enregistrer dans l’historique
+            </label>
+
+            <input type="submit" class="Btn_calc" value="Calculer">
         </form>
+
 
 
         <div class="result">
