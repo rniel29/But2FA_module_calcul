@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $mot_de_passe = $_POST['passwd'] ?? '';
         $mot_de_passe_hash = md5($mot_de_passe);
 
-        $stmt = $conn->prepare("UPDATE user SET mot_de_passe = ? WHERE login = ?");
+        $stmt = $conn->prepare("UPDATE user SET password = ? WHERE login = ?");
         if (!$stmt) {
             die("Erreur de préparation : " . $conn->error);
         }
