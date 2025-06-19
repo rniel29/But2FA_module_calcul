@@ -19,24 +19,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $mot_de_passe = $_POST['passwd'] ?? '';
 
     // Préparer une requête sécurisée
-    $stmt = $conn->prepare("SELECT login FROM user WHERE login = ? AND password = ?");
-    $stmt->bind_param("ss", $identifiant, $mot_de_passe);
+    $stmt = $conn->prepare("SELECT password FROM user WHERE login = ?");
+    $stmt->bind_param("s", $identifiant);
     $stmt->execute();
     $stmt->store_result();
- if ($stmt->num_rows > 0) {
-        $_SESSION['identifiant'] = $identifiant;
+    if ($stmt->num_rows > 0) {
+        $stmt->bind_result($hash);
+        $stmt->fetch();
+        if (password_verify($mot_de_passe, $hash)) {
+            // Mot de passe correct
+            $_SESSION['identifiant'] = $identifiant;
 
-        if ($identifiant === 'adminweb') {
-            header('Location: admin_Web.php');
-        } elseif ($identifiant === 'adminsysteme') {
-            header('Location: admin_Systeme.php');
-            exit();
+            // Mise à jour date/heure et IP dernière connexion
+            $ip = $_SERVER['REMOTE_ADDR'];
+            $now = date('Y-m-d H:i:s');
+
+            $update = $conn->prepare("UPDATE user SET last_login = ?, last_ip = ? WHERE login = ?");
+            $update->bind_param("sss", $now, $ip, $identifiant);
+            $update->execute();
+            $update->close();
+
+            if ($identifiant === 'adminweb') {
+                header('Location: admin_Web.php');
+                exit();
+            } elseif ($identifiant === 'adminsysteme') {
+                header('Location: admin_Systeme.php');
+                exit();
+            } else {
+                header('Location: modules.php');
+                exit();
+            }
         } else {
-            header('Location: modules.php');
-            exit();
+            $message = "Mot de passe incorrect !";
         }
     } else {
-        $message = "L'utilisateur n'existe pas ou mot de passe incorrect !";
+        $message = "L'utilisateur n'existe pas !";
     }
 
     $stmt->close();
