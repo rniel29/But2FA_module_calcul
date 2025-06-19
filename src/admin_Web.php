@@ -1,16 +1,12 @@
 <?php
 session_start();
-if (!isset($_SESSION['identifiant'])) {
+
+if (!isset($_SESSION['identifiant']) || $_SESSION['identifiant'] !== 'adminweb') {
     header('Location: index.php');
     exit();
 }
 
-if ($_SESSION['identifiant'] !== 'adminweb') {
-    header('Location: index.php');
-    exit();
-}
-
-// Connexion base de données
+$alert = '';
 $host = 'localhost';
 $db   = 'sae';
 $user = 'admin';
@@ -21,6 +17,35 @@ if ($conn->connect_error) {
     die("Erreur de connexion à la base de données : " . $conn->connect_error);
 }
 
+// Traitement de la suppression d'utilisateur
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['supprimer_user_id'])) {
+    $user_id = intval($_POST['supprimer_user_id']);
+
+    $stmt_check = $conn->prepare("SELECT login FROM user WHERE id = ?");
+    $stmt_check->bind_param("i", $user_id);
+    $stmt_check->execute();
+    $stmt_check->bind_result($login);
+    $stmt_check->fetch();
+    $stmt_check->close();
+
+    if ($login !== 'adminweb') {
+        $stmt_results = $conn->prepare("DELETE FROM resultats WHERE user_id = ?");
+        $stmt_results->bind_param("i", $user_id);
+        $stmt_results->execute();
+        $stmt_results->close();
+
+        $stmt = $conn->prepare("DELETE FROM user WHERE id = ?");
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $stmt->close();
+
+        $alert = "✔️ Utilisateur supprimé.";
+    } else {
+        $alert = "❌ Suppression interdite pour cet utilisateur.";
+    }
+}
+
+// Récupération des utilisateurs
 $sql = "SELECT id, login FROM user WHERE login != 'adminweb' ORDER BY login";
 $result = $conn->query($sql);
 ?>
@@ -52,8 +77,13 @@ $result = $conn->query($sql);
     </div>
 
     <div class="main_admin_dash">
-        <div class="Div_table_admin_web">
+        <?php if (!empty($alert)): ?>
+            <div style="text-align:center; color:red; font-weight:bold; margin: 10px;">
+                <?= htmlspecialchars($alert) ?>
+            </div>
+        <?php endif; ?>
 
+        <div class="Div_table_admin_web">
             <table class="table_admin_web_dashboard">
                 <thead>
                     <tr>
@@ -63,30 +93,29 @@ $result = $conn->query($sql);
                     </tr>
                 </thead>
                 <tbody>
-                <?php
-                if ($result && $result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<tr>";
-                        echo "<td>" . htmlspecialchars($row['login']) . "</td>";
-                        echo "<td>
-                                <form method='post' action='historique_utilisateur.php' style='display:inline;'>
-                                    <input type='hidden' name='user_id' value='{$row['id']}'>
-                                    <button class='Btn_hist' aria-label='Consulter l'historique de {$row['login']}'></button>
-                                </form>
-                              </td>";
-                        echo "<td>
-                                <form method='post' action='supprimer_utilisateur.php' onsubmit=\"return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');\" style='display:inline;'>
-                                    <input type='hidden' name='user_id' value='{$row['id']}'>
-                                    <button class='Btn_Sup' aria-label='Supprimer l'utilisateur {$row['login']}'></button>
-                                </form>
-                              </td>";
-                        echo "</tr>";
+                    <?php
+                    if ($result && $result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<tr>";
+                            echo "<td>" . htmlspecialchars($row['login']) . "</td>";
+                            echo "<td>
+                                    <form method='post' action='historique_utilisateur.php' style='display:inline;'>
+                                        <input type='hidden' name='user_id' value='" . $row['id'] . "'>
+                                        <button class='Btn_hist' aria-label='Historique " . htmlspecialchars($row['login']) . "'></button>
+                                    </form>
+                                  </td>";
+                            echo "<td>
+                                    <form method='post' style='display:inline;' onsubmit=\"return confirm('Supprimer cet utilisateur ?');\">
+                                        <input type='hidden' name='supprimer_user_id' value='" . $row['id'] . "'>
+                                        <button class='Btn_Sup' aria-label='Supprimer " . htmlspecialchars($row['login']) . "'></button>
+                                    </form>
+                                  </td>";
+                            echo "</tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='3'>Aucun utilisateur trouvé.</td></tr>";
                     }
-                } else {
-                    echo "<tr><td colspan='3'>Aucun utilisateur trouvé.</td></tr>";
-                }
-                $conn->close();
-                ?>
+                    ?>
                 </tbody>
             </table>
 
@@ -98,7 +127,10 @@ $result = $conn->query($sql);
                 </thead>
                 <tbody>
                     <tr>
-                        <td><img class="icon_Online" src="Images/icon_Online.png" width="20" height="20" alt="connecté"> adminweb</td>
+                        <td>
+                            <img class="icon_Online" src="Images/icon_Online.png" width="20" height="20" alt="En ligne">
+                            <?= htmlspecialchars($_SESSION['identifiant']) ?>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -110,7 +142,7 @@ $result = $conn->query($sql);
 
 <footer>
     <div class="footer">
-        <img src="Images/IUT.jpg" alt="Logo_IUT_UVSQ" height="60">
+        <img src="Images/IUT.jpg" alt="Logo IUT UVSQ" height="60">
         <ul class="sans-puces">
             <li>KOUNDI Maryam</li>
             <li>NIEL Ronan</li>
