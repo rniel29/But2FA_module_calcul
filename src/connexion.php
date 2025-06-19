@@ -23,10 +23,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->bind_param("s", $identifiant);
     $stmt->execute();
     $stmt->store_result();
+
     if ($stmt->num_rows > 0) {
         $stmt->bind_result($hash);
         $stmt->fetch();
-        if (password_verify($mot_de_passe, $hash)) {
+
+        // Vérification MD5
+        if (md5($mot_de_passe) === $hash) {
             // Mot de passe correct
             $_SESSION['identifiant'] = $identifiant;
 
@@ -34,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $ip = $_SERVER['REMOTE_ADDR'];
             $now = date('Y-m-d H:i:s');
 
-            $update = $conn->prepare("UPDATE user SET last_login = ?, last_ip = ? WHERE login = ?");
+            $update = $conn->prepare("UPDATE user SET last_connection = ?, last_ip = ? WHERE login = ?");
             $update->bind_param("sss", $now, $ip, $identifiant);
             $update->execute();
             $update->close();
@@ -60,6 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $conn->close();
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="fr">
