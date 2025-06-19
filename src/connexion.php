@@ -77,6 +77,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <label class="input_pswd" for="mot_de_passe"></label>
                     <input type="password" id ="mot_de_passe" name= "passwd">
                     <input class="Btn_Form_Co" type="submit" name="connexion" value="Se connecter">
+
+                    <p><a href="mdp_oublier.php">Mot de passe oublié</a></p>
                 </form>
             </div>
             <?php if (!empty($message)) echo "<p style='color:red; text-align:center;'>$message</p>"; ?>
