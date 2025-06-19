@@ -35,7 +35,6 @@ if ($_SESSION['identifiant'] !== 'sysadmin') {
         <div class="div_Btn_mod">
             <button class="Btn_mod" onclick="location.href='modules.php'">Loi normale</button>
             <button class="Btn_mod" onclick="location.href='cryptographie.php'">Cryptographie</button>
-            <button class="Btn_mod" onclick="location.href='maths.php'">Maths</button>
         </div>
 
             <div class="Div_table_admin_systeme">
