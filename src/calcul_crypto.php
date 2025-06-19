@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+if (!isset($_SESSION['identifiant'])) {
+    header('Location: login.php'); // Redirige vers la page de connexion si non connecté
+    exit();
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mot_cry = isset($_POST['mot_a_chiffrer']) ? $_POST['mot_a_chiffrer'] : '';

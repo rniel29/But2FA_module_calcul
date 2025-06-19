@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+<?php
+session_start();
+
+if (!isset($_SESSION['identifiant'])) {
+    header('Location: login.php'); // Redirige vers la page de connexion si non connecté
+    exit();
+}
+?>
 <html lang="fr">
     <head>
         <title>SAE - Accueil</title>

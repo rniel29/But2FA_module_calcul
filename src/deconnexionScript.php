@@ -1,4 +1,4 @@
-<!-- DeconnexionScript.php -->
+
 <?php
 
 session_start();

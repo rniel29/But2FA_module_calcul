@@ -21,8 +21,6 @@
         </header>
 
         <main>
-            <div class="div_Btn_mod"><button class="Btn_mod" onclick="location.href='modules.php'">Modules</button></div>
-
             <div class="center_acc">
                 <div id="ratio">
                     <!-- <iframe  src="Vidéo/DUT Informatique (INFO) _ Présentation.mp4" allowTransparency="true"></iframe> -->

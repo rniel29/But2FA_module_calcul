@@ -1,5 +1,9 @@
 <?php
 session_start(); // Démarre la session pour accéder aux variables de session
+if (!isset($_SESSION['identifiant'])) {
+    header('Location: login.php');
+    exit();
+}
 
 ?>
 <!DOCTYPE html>

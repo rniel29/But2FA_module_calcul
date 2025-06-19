@@ -1,4 +1,16 @@
 <!DOCTYPE html>
+<?php
+if (!isset($_SESSION['identifiant'])) {
+    header('Location: login.php');
+    exit();
+}
+
+// Exemple : Accès réservé à adminweb
+if ($_SESSION['identifiant'] !== 'sysadmin') {
+    header('Location: unauthorized.php'); // ou un message d’erreur
+    exit();
+}
+?>
 <html lang="fr">
     <head>
         <title>SAE - Admin Systeme</title>
