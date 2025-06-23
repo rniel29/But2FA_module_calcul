@@ -59,7 +59,7 @@ $conn->close();
                 <button class="Btn_mod" onclick="location.href='profil.php'">Profil</button>
             </div>
     <body>
-        <div class="center_acc">
+        <div class="main_admin_dash">
         <h1>Journal des connexions utilisateurs</h1>
 
         <table border="1" cellpadding="6">
