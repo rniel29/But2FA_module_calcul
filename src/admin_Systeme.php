@@ -29,29 +29,63 @@ $conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Admin Système – Journal des connexions</title>
-    <style>
-        table { border-collapse: collapse; margin-top: 20px }
-        th, td { border: 1px solid #000; padding: 6px 12px; text-align: center }
-    </style>
-</head>
-<body>
-    <h1>Journal des connexions utilisateurs</h1>
-    <table>
-        <tr>
-            <th>Login</th>
-            <th>Dernière IP</th>
-            <th>Dernière connexion</th>
-        </tr>
-        <?php foreach ($users as $u): ?>
+    <head>
+        <title>SAE - Admin sys</title>
+        <link rel="icon" href="Images/Logo.png">
+        <meta charset="UTF-8">
+        <link href="css/style.css" rel="stylesheet">
+
+
+
+    </head>
+    <body>
+        <header>
+            <div class="header">
+                <img class = "logo" src="Images/Logo.png" alt="Logo du site web">
+                <h1><a class="Acc" href="accueil_Membre.php">Modul∈Calcul</a></h1>
+                <form method="post" action="deconnexionScript.php">
+                    <div class="buttons">
+                        <button class="Btn_acc" onclick="location.href='index.php'" name="DeconnexionScript">Déconnexion</button>
+                    </div>
+                </form>
+            </div>
+        </header>
+
+        <main>
+
+            <div class="div_Btn_mod">
+                <button class="Btn_mod" onclick="location.href='modules.php'">Loi normale</button>
+                <button class="Btn_mod" onclick="location.href='cryptographie.php'">Cryptographie</button>
+                <button class="Btn_mod" onclick="location.href='profil.php'">Profil</button>
+            </div>
+    <body>
+        <h1>Journal des connexions utilisateurs</h1>
+
+        <table border="1" cellpadding="6">
+            <tr>
+                <th>Login</th>
+                <th>Dernière IP</th>
+                <th>Dernière Connexion</th>
+            </tr>
+            <?php foreach ($users as $u): ?>
             <tr>
                 <td><?= htmlspecialchars($u['login']) ?></td>
                 <td><?= $u['last_ip'] ?: 'Jamais' ?></td>
                 <td><?= $u['last_connection'] ?: 'Jamais' ?></td>
             </tr>
-        <?php endforeach; ?>
-    </table>
-</body>
+            <?php endforeach ?>
+        </table>
+                <footer>
+                <div class="footer">
+                    <img src="Images/IUT.jpg" alt="Logo_IUT_UVSQ" height="60">
+
+                    <ul class="sans-puces">
+                        <li>KOUNDI Maryam</li>
+                        <li>NIEL Ronan</li>
+                        <li>BELOT Hervé</li>
+                    </ul>
+                </div>
+            </footer>
+    </body>
 </html>
+
