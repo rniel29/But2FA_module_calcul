@@ -1,4 +1,9 @@
 <?php
+
+echo "<pre>";
+print_r($_FILES);
+echo "</pre>";
+
 session_start();
 
 if (!isset($_SESSION['identifiant']) || $_SESSION['identifiant'] !== 'adminweb') {
@@ -105,19 +110,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['csv_file'])) {
         $alert = "boucle 1";
     }
 
-} else{
-    $alert = "boucle 3";
 }
-
-
-
-
-
 
 // Récupération des utilisateurs
 $sql = "SELECT id, login FROM user WHERE login != 'adminweb' ORDER BY login";
 $result = $conn->query($sql);
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
