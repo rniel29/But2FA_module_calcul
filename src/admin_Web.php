@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['supprimer_user_id']))
 
 
 // Importer le csv
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['csv_file'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['csv_file'])) {
 
     try {
         $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $pass);
@@ -57,14 +57,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['csv_file'])) {
     }
 
     if (isset($_FILES['csv_file']) && $_FILES['csv_file']['error'] === 0) {
-        $fileTmpPath = $_FILES['csv_file']['tmp_name'];
-        $fileExtension = pathinfo($_FILES['csv_file']['name'], PATHINFO_EXTENSION);
+        $fileTmpPath = $_FILES['csv_file']['tmp_name'];     //pour avoir le chemin de ou se trouve le fichier
+        $fileExtension = pathinfo($_FILES['csv_file']['name'], PATHINFO_EXTENSION); //recupere lextension du fichier
 
         if (strtolower($fileExtension) === 'csv') {
             if (($handle = fopen($fileTmpPath, 'r')) !== false) {
                 $row = 0;
                 while (($data = fgetcsv($handle, 1000, ',')) !== false) {
-                    // Sauter la ligne d'en-tête
+                    // Sauter la premiere ligne
                     if ($row === 0) {
                         $row++;
                         continue;
@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['csv_file'])) {
                     $mot_de_passe = trim($data[1]);
 
                     if (empty($identifiant) || empty($mot_de_passe)) {
-                        continue; // ignorer lignes incomplètes
+                        continue; // ignorer lignes vides
                     }
 
                     // Vérifie si l'identifiant existe déjà
@@ -96,17 +96,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['csv_file'])) {
                 }
 
                 fclose($handle);
-                echo "Import terminé avec succès.";
-            } else {
-                echo "Erreur lors de l'ouverture du fichier.";
             }
         } else {
-            echo "Format de fichier invalide. Veuillez utiliser un fichier CSV.";
+            echo "Format de fichier invalide.";
         }
     } else {
         echo "Aucun fichier sélectionné ou erreur lors de l'upload.";
     }
-    
+
 }
 
 
