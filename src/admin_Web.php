@@ -85,6 +85,8 @@ $historique = $conn->query("SELECT login, date_suppression FROM utilisateurs_sup
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <title>SAE - Admin WEB</title>
+    <link rel="icon" href="Images/Logo.png">
     <title>Admin Web</title>
     <meta charset="UTF-8">
     <link href="css/style.css" rel="stylesheet">
@@ -92,45 +94,84 @@ $historique = $conn->query("SELECT login, date_suppression FROM utilisateurs_sup
 <body>
 
 <header>
+    <div class="header">
+        <img class="logo" src="Images/Logo.png" alt="Logo du site web">
+        <h1><a class="Acc" href="accueil_Membre.php">Modul∈Calcul</a></h1>
+        <form method="post" action="deconnexionScript.php">
+            <div class="buttons">
+                <button class="Btn_acc" name="DeconnexionScript">Déconnexion</button>
+            </div>
+        </form>
+    </div>
     <h1>Admin Web</h1>
 </header>
 
-<?php if ($alert): ?>
-    <p style="color:red; text-align:center"><?= htmlspecialchars($alert) ?></p>
-<?php endif; ?>
+<main>
+    <div class="div_Btn_mod">
+        <button class="Btn_mod" onclick="location.href='modules.php'">Loi normale</button>
+        <button class="Btn_mod" onclick="location.href='cryptographie.php'">Cryptographie</button>
+        <button class="Btn_mod" onclick="location.href='profil.php'">Profil</button>
+    </div>
 
-<h2>Utilisateurs inscrits</h2>
-<table >
-    <tr><th>Login</th><th>Supprimer</th></tr>
-    <?php while ($row = $result->fetch_assoc()): ?>
-        <tr>
-            <td><?= htmlspecialchars($row['login']) ?></td>
-            <td>
-                <form method="post" onsubmit="return confirm('Supprimer cet utilisateur ?');">
-                    <input type="hidden" name="supprimer_user_id" value="<?= $row['id'] ?>">
-                    <button class="Btn_Sup">❌</button>
-                </form>
-            </td>
-        </tr>
-    <?php endwhile; ?>
+    <div class="main_admin_dash">
+        <?php if ($alert): ?>
+            <p style="color:red; text-align:center"><?= htmlspecialchars($alert) ?></p>
+        <?php endif; ?>
+
+        <h2>Utilisateurs inscrits</h2>
+        <table >
+            <tr><th>Login</th><th>Supprimer</th></tr>
+            <?php while ($row = $result->fetch_assoc()): ?>
+                <tr>
+                    <td><?= htmlspecialchars($row['login']) ?></td>
+                    <td>
+                        <form method="post" onsubmit="return confirm('Supprimer cet utilisateur ?');">
+                            <input type="hidden" name="supprimer_user_id" value="<?= $row['id'] ?>">
+                            <button class="Btn_Sup">❌</button>
+                        </form>
+                    </td>
+                </tr>
+            <?php endwhile; ?>
+        </table>
+
+    <h2>Importer des utilisateurs (CSV)</h2>
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="csv_file" accept=".csv" required>
+        <button type="submit">Importer</button>
+    </form>
+
+    <h2>Historique des utilisateurs supprimés</h2>
+    <table>
+        <tr><th>Login</th><th>Date de suppression</th></tr>
+        <?php while ($row = $historique->fetch_assoc()): ?>
+            <tr>
+                <td><?= htmlspecialchars($row['login']) ?></td>
+                <td><?= htmlspecialchars($row['date_suppression']) ?></td>
+            </tr>
+        <?php endwhile; ?>
 </table>
+    </div>
+    
+</main>
 
-<h2>Importer des utilisateurs (CSV)</h2>
-<form method="post" enctype="multipart/form-data">
-    <input type="file" name="csv_file" accept=".csv" required>
-    <button type="submit">Importer</button>
-</form>
+<footer>
+    <div class="footer">
+        <img src="Images/IUT.jpg" alt="Logo IUT UVSQ" height="60">
+        <ul class="sans-puces">
+            <li>KOUNDI Maryam</li>
+            <li>NIEL Ronan</li>
+            <li>BELOT Hervé</li>
+        </ul>Add commentMore actions
+    </div>
+</footer>
 
-<h2>Historique des utilisateurs supprimés</h2>
-<table>
-    <tr><th>Login</th><th>Date de suppression</th></tr>
-    <?php while ($row = $historique->fetch_assoc()): ?>
-        <tr>
-            <td><?= htmlspecialchars($row['login']) ?></td>
-            <td><?= htmlspecialchars($row['date_suppression']) ?></td>
-        </tr>
-    <?php endwhile; ?>
-</table>
 
 </body>
 </html>
+
+
+
+
+
+
+
