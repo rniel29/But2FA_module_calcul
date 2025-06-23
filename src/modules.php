@@ -34,6 +34,7 @@ if (!isset($_SESSION['identifiant'])) {
 <div class="div_Btn_mod">
     <button class="Btn_mod" onclick="location.href='modules.php'">Loi normale</button>
     <button class="Btn_mod" onclick="location.href='cryptographie.php'">Cryptographie</button>
+    <button class="Btn_mod" onclick="location.href='profil.php'">Profil</button>
 </div>
 <div class="Div_mod">
     <div class="mod1">
@@ -46,7 +47,7 @@ if (!isset($_SESSION['identifiant'])) {
             <input type="number" id="moyenne" name="moyenne" placeholder="m" required>
 
             <label for="ecart_type">Écart type</label>
-            <input type="number" id="ecart_type" name="ecart_type" min="0" placeholder="ecart type > 0" required>
+            <input type="number" id="ecart_type" name="ecart_type" min="0" placeholder="écart type > 0" required>
 
             <label for="portee">Portée</label>
             <input type="number" id="portee" name="portee" placeholder="t" required>
@@ -54,25 +55,36 @@ if (!isset($_SESSION['identifiant'])) {
             <label for="pas">Nombre de rectangles</label>
             <input type="number" id="pas" name="pas" min="1" max="20000" placeholder="Nb de rectangles < 20 000" required>
 
+            <label>
+                <input type="checkbox" name="enregistrer" value="1">
+                Enregistrer dans l’historique
+            </label>
+
             <input type="submit" class="Btn_calc" value="Calculer">
         </form>
 
 
 
-
         <div class="result">
             <?php
-            // Afficher le résultat s'il existe
             if (isset($_SESSION['resultat'])) {
-                echo "<p class='resultat'>$$ P(X \leq  " .$_SESSION['portee'].") =" .$_SESSION['resultat']."$$</p>";
-                // Supprimer le résultat après l'affichage
+                echo "<p class='resultat'>$$ P(X \leq  {$_SESSION['portee']}) = {$_SESSION['resultat']} $$</p>";
                 unset($_SESSION['resultat']);
-            } elseif (isset($_SESSION['error_message'])) {
+                unset($_SESSION['portee']);
+            }
+
+            if (isset($_SESSION['message'])) {
+                echo "<p class='success'>" . $_SESSION['message'] . "</p>";
+                unset($_SESSION['message']);
+            }
+
+            if (isset($_SESSION['error_message'])) {
                 echo "<p class='error'>" . $_SESSION['error_message'] . "</p>";
                 unset($_SESSION['error_message']);
             }
             ?>
         </div>
+
 
     </div>
 

@@ -336,3 +336,8 @@ table,th,td{
     margin-bottom: 5px;
     font-family: monospace;
 }
+
+.success {
+    color: green;
+    font-weight: bold;
+}
