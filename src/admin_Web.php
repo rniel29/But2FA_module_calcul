@@ -48,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['supprimer_user_id']))
 
 // Importer le csv
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['csv_file'])) {
+    $alert = "🟢 CSV détecté, traitement en cours...";
 
     try {
         $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $pass);
@@ -98,12 +99,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['csv_file'])) {
                 fclose($handle);
             }
         } else {
-            echo "Format de fichier invalide.";
+            $alert = "boucle 2";
         }
     } else {
-        echo "Aucun fichier sélectionné ou erreur lors de l'upload.";
+        $alert = "boucle 1";
     }
 
+} else{
+    $alert = "boucle 3";
 }
 
 
