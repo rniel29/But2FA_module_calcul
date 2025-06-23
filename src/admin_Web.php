@@ -103,7 +103,6 @@ $historique = $conn->query("SELECT login, date_suppression FROM utilisateurs_sup
             </div>
         </form>
     </div>
-    <h1>Admin Web</h1>
 </header>
 
 <main>
