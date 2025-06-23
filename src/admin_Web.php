@@ -45,6 +45,75 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['supprimer_user_id']))
     }
 }
 
+
+// Importer le csv
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['csv_file'])) {
+    $alert = "🟢 CSV détecté, traitement en cours...";
+
+    try {
+        $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $pass);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch (PDOException $e) {
+        die("Erreur de connexion : " . $e->getMessage());
+    }
+
+    if (isset($_FILES['csv_file']) && $_FILES['csv_file']['error'] === 0) {
+        $fileTmpPath = $_FILES['csv_file']['tmp_name'];     //pour avoir le chemin de ou se trouve le fichier
+        $fileExtension = pathinfo($_FILES['csv_file']['name'], PATHINFO_EXTENSION); //recupere lextension du fichier
+
+        if (strtolower($fileExtension) === 'csv') {
+            if (($handle = fopen($fileTmpPath, 'r')) !== false) {
+                $row = 0;
+                while (($data = fgetcsv($handle, 1000, ',')) !== false) {
+                    // Sauter la premiere ligne
+                    if ($row === 0) {
+                        $row++;
+                        continue;
+                    }
+
+                    $identifiant = trim($data[0]);
+                    $mot_de_passe = trim($data[1]);
+
+                    if (empty($identifiant) || empty($mot_de_passe)) {
+                        continue; // ignorer lignes vides
+                    }
+
+                    // Vérifie si l'identifiant existe déjà
+                    $check = $pdo->prepare("SELECT login FROM user WHERE login = :identifiant");
+                    $check->bindParam(':identifiant', $identifiant);
+                    $check->execute();
+
+                    if ($check->rowCount() === 0) {
+                        // Hash du mot de passe
+                        $mot_de_passe_hash = md5($mot_de_passe);
+
+                        $stmt = $pdo->prepare("INSERT INTO user (login, password) VALUES (:identifiant, :mot_de_passe)");
+                        $stmt->bindParam(':identifiant', $identifiant);
+                        $stmt->bindParam(':mot_de_passe', $mot_de_passe_hash);
+                        $stmt->execute();
+                    }
+
+                    $row++;
+                }
+
+                fclose($handle);
+            }
+        } else {
+            $alert = "boucle 2";
+        }
+    } else {
+        $alert = "boucle 1";
+    }
+
+} else{
+    $alert = "boucle 3";
+}
+
+
+
+
+
+
 // Récupération des utilisateurs
 $sql = "SELECT id, login FROM user WHERE login != 'adminweb' ORDER BY login";
 $result = $conn->query($sql);
@@ -89,7 +158,6 @@ $result = $conn->query($sql);
                 <thead>
                     <tr>
                         <th scope="col">Utilisateurs inscrits</th>
-                        <th scope="col">Historique</th>
                         <th scope="col">Supprimer</th>
                     </tr>
                 </thead>
@@ -99,12 +167,6 @@ $result = $conn->query($sql);
                         while ($row = $result->fetch_assoc()) {
                             echo "<tr>";
                             echo "<td>" . htmlspecialchars($row['login']) . "</td>";
-                            echo "<td>
-                                    <form method='post' action='historique_utilisateur.php' style='display:inline;'>
-                                        <input type='hidden' name='user_id' value='" . $row['id'] . "'>
-                                        <button class='Btn_hist' aria-label='Historique " . htmlspecialchars($row['login']) . "'></button>
-                                    </form>
-                                  </td>";
                             echo "<td>
                                     <form method='post' style='display:inline;' onsubmit=\"return confirm('Supprimer cet utilisateur ?');\">
                                         <input type='hidden' name='supprimer_user_id' value='" . $row['id'] . "'>
@@ -119,25 +181,14 @@ $result = $conn->query($sql);
                     ?>
                 </tbody>
             </table>
-
-            <table class="table_admin_web_Online">
-                <thead>
-                    <tr>
-                        <th scope="col">Utilisateurs connectés</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <img class="icon_Online" src="Images/icon_Online.png" width="20" height="20" alt="En ligne">
-                            <?= htmlspecialchars($_SESSION['identifiant']) ?>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
 
         <button class="Btn_adm_consultation">Consulter les modifications</button>
+        <form method="POST" class="Importer" action="" enctype="multipart/form-data">
+            <label for="csv">Choisissez un fichier CSV (login, mot de passe) pour créer un utilisateur :</label>
+            <input type="file" name="csv_file" id="csv" accept=".csv" required>
+            <button type="submit" name="submit">Importer</button>
+        </form>
     </div>
 </main>
 
