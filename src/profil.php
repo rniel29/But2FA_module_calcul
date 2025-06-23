@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['identifiant'])) {
-    header('Location: login.php');
+    header('Location: index.php');
     exit();
 }
 
@@ -64,7 +64,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="div_Btn_mod">
             <button class="Btn_mod" onclick="location.href='modules.php'">Loi normale</button>
             <button class="Btn_mod" onclick="location.href='cryptographie.php'">Cryptographie</button>
-            <button class="Btn_mod" onclick="location.href='maths.php'">Maths</button>
         </div>
         <main>
             <h1>Bonjour <?php echo htmlspecialchars($identifiant); ?></h1>
