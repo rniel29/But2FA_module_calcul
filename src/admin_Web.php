@@ -16,16 +16,6 @@ if ($conn->connect_error) {
     die("Erreur de connexion : " . $conn->connect_error);
 }
 
-// Créer dossier/fichier logs s'ils n'existent pas
-$logDir = __DIR__ . '/logs';
-$logFile = $logDir . '/suppressions.log';
-if (!file_exists($logDir)) {
-    mkdir($logDir, 0777, true);
-}
-if (!file_exists($logFile)) {
-    file_put_contents($logFile, "== Journal des suppressions ==\n");
-    chmod($logFile, 0666);
-}
 
 // Supprimer un utilisateur
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['supprimer_user_id'])) {
@@ -38,6 +28,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['supprimer_user_id']))
     $stmt->close();
 
     if ($login !== 'adminweb') {
+        // Créer dossier/fichier logs s'ils n'existent pas
+        $logDir = __DIR__ . '/logs';
+        $logFile = $logDir . '/suppressions.log';
+        if (!file_exists($logDir)) {
+            mkdir($logDir, 0777, true);
+        }
+        if (!file_exists($logFile)) {
+            file_put_contents($logFile, "== Journal des suppressions ==\n");
+            chmod($logFile, 0666);
+        }
+
         $conn->query("DELETE FROM resultats WHERE user_id = $user_id");
 
         $del_stmt = $conn->prepare("DELETE FROM user WHERE id = ?");
