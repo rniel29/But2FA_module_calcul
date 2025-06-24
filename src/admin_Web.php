@@ -51,9 +51,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['supprimer_user_id']))
         $log_line = "$now - Utilisateur supprimé : $login\n";
         file_put_contents($logFile, $log_line, FILE_APPEND);
 
-        $alert = "\u2714\ufe0f Utilisateur '$login' supprimé.";
+        $alert = " Utilisateur '$login' supprimé.";
     } else {
-        $alert = "\u274c Suppression de l'administrateur interdite.";
+        $alert = " Suppression de l'administrateur interdite.";
     }
 }
 
@@ -78,10 +78,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['csv_file'])) {
                 }
             }
             fclose($handle);
-            $alert = "\u2705 Utilisateurs importés avec succès.";
+            $alert = " Utilisateurs importés avec succès.";
         }
     } else {
-        $alert = "\u274c Erreur lors de l'import.";
+        $alert = " Erreur lors de l'import.";
     }
 }
 
