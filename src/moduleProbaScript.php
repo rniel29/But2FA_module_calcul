@@ -58,6 +58,10 @@ function rectangle_median($m, $c, $t, $n) {
     for ($i = 0; $i < $n; $i++) {
         $x = $a + ($i + 0.5) * $h;
         $formule = (1 / ($c * sqrt(2 * M_PI))) * exp(-0.5 * pow(($x - $m) / $c, 2));
+        if ($formule < 0) {
+            return "Le calcul n'est pas possible : valeur négative inattendue.";
+        }
+
         $somme += $formule;
     }
 
