@@ -35,6 +35,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['user_id'])) {
         header("Location: admin_Web.php?message=interdit");
         exit();
     }
+    if ($login === 'sysadmin') {
+        $conn->close();
+        header("Location: admin_Web.php?message=interdit");
+        exit();
+    }
 
     // Supprimer les résultats liés à l'utilisateur
     $stmt_results = $conn->prepare("DELETE FROM resultats WHERE user_id = ?");

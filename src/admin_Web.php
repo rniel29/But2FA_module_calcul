@@ -16,10 +16,20 @@ if ($conn->connect_error) {
     die("Erreur de connexion : " . $conn->connect_error);
 }
 
-// Suppression utilisateur
+// Créer dossier/fichier logs s'ils n'existent pas
+$logDir = __DIR__ . '/logs';
+$logFile = $logDir . '/suppressions.log';
+if (!file_exists($logDir)) {
+    mkdir($logDir, 0777, true);
+}
+if (!file_exists($logFile)) {
+    file_put_contents($logFile, "== Journal des suppressions ==\n");
+    chmod($logFile, 0666);
+}
+
+// Supprimer un utilisateur
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['supprimer_user_id'])) {
     $user_id = intval($_POST['supprimer_user_id']);
-
     $stmt = $conn->prepare("SELECT login FROM user WHERE id = ?");
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
@@ -28,10 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['supprimer_user_id']))
     $stmt->close();
 
     if ($login !== 'adminweb') {
-        $now = date('Y-m-d H:i:s');
-        $log_line = "$now - Utilisateur supprimé : $login\n";
-        file_put_contents('logs/suppressions.log', $log_line, FILE_APPEND);
-
         $conn->query("DELETE FROM resultats WHERE user_id = $user_id");
 
         $del_stmt = $conn->prepare("DELETE FROM user WHERE id = ?");
@@ -39,13 +45,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['supprimer_user_id']))
         $del_stmt->execute();
         $del_stmt->close();
 
-        $alert = "Utilisateur '$login' supprimé.";
+        // Écrire dans le fichier log
+        $now = date('Y-m-d H:i:s');
+        $log_line = "$now - Utilisateur supprimé : $login\n";
+        file_put_contents($logFile, $log_line, FILE_APPEND);
+
+        $alert = "\u2714\ufe0f Utilisateur '$login' supprimé.";
     } else {
-        $alert = "Suppression de l'administrateur interdite.";
+        $alert = "\u274c Suppression de l'administrateur interdite.";
     }
 }
 
-//  Import CSV
+// Import CSV
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['csv_file'])) {
     if ($_FILES['csv_file']['error'] === 0) {
         $tmp = $_FILES['csv_file']['tmp_name'];
@@ -57,7 +68,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['csv_file'])) {
                 if ($row++ === 0) continue;
                 [$login, $pwd] = array_map('trim', $data);
                 if (!$login || !$pwd) continue;
-
                 $check = $pdo->prepare("SELECT id FROM user WHERE login = ?");
                 $check->execute([$login]);
                 if ($check->rowCount() === 0) {
@@ -67,28 +77,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['csv_file'])) {
                 }
             }
             fclose($handle);
-            $alert = "Utilisateurs importés avec succès.";
+            $alert = "\u2705 Utilisateurs importés avec succès.";
         }
     } else {
-        $alert = "Erreur lors de l'import.";
+        $alert = "\u274c Erreur lors de l'import.";
     }
 }
 
-// Utilisateurs actifs
 $result = $conn->query("SELECT id, login FROM user WHERE login != 'adminweb' ORDER BY login");
-
-// Log fichier
-$log_entries = file_exists('logs/suppressions.log') ? file('logs/suppressions.log') : [];
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <title>SAE - Admin WEB</title>
+    <link rel="icon" href="Images/Logo.png">
     <meta charset="UTF-8">
     <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-
 <header>
     <div class="header">
         <img class="logo" src="Images/Logo.png" alt="Logo du site web">
@@ -134,13 +140,6 @@ $log_entries = file_exists('logs/suppressions.log') ? file('logs/suppressions.lo
             <input type="file" name="csv_file" accept=".csv" required>
             <button type="submit">Importer</button>
         </form>
-
-        <h2>Historique des suppressions</h2>
-        <pre style="background:#f9f9f9; border:1px solid #ccc; padding:10px; max-height:200px; overflow-y:auto;">
-<?php foreach ($log_entries as $line): ?>
-<?= htmlspecialchars($line) ?>
-<?php endforeach; ?>
-        </pre>
     </div>
 </main>
 
@@ -154,6 +153,5 @@ $log_entries = file_exists('logs/suppressions.log') ? file('logs/suppressions.lo
         </ul>
     </div>
 </footer>
-
 </body>
 </html>
