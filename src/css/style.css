@@ -301,8 +301,8 @@ table,th,td{
 .Div_mod{
     padding: 20px;
     justify-content: center;
-
     display: flex;
+    margin-bottom:10% ;
 
 }
 
