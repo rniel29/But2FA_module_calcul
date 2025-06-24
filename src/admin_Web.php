@@ -16,7 +16,7 @@ if ($conn->connect_error) {
     die("Erreur de connexion : " . $conn->connect_error);
 }
 
-//  Supprimer un utilisateur et enregistrer dans historiques
+// Suppression utilisateur
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['supprimer_user_id'])) {
     $user_id = intval($_POST['supprimer_user_id']);
 
@@ -29,10 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['supprimer_user_id']))
 
     if ($login !== 'adminweb') {
         $now = date('Y-m-d H:i:s');
-        $log_stmt = $conn->prepare("INSERT INTO utilisateurs_supprimes (login, date_suppression) VALUES (?, ?)");
-        $log_stmt->bind_param("ss", $login, $now);
-        $log_stmt->execute();
-        $log_stmt->close();
+        $log_line = "$now - Utilisateur supprimé : $login\n";
+        file_put_contents('logs/suppressions.log', $log_line, FILE_APPEND);
 
         $conn->query("DELETE FROM resultats WHERE user_id = $user_id");
 
@@ -41,9 +39,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['supprimer_user_id']))
         $del_stmt->execute();
         $del_stmt->close();
 
-        $alert = "✔️ Utilisateur '$login' supprimé.";
+        $alert = "Utilisateur '$login' supprimé.";
     } else {
-        $alert = "❌ Suppression de l'administrateur interdite.";
+        $alert = "Suppression de l'administrateur interdite.";
     }
 }
 
@@ -69,25 +67,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['csv_file'])) {
                 }
             }
             fclose($handle);
-            $alert = "✅ Utilisateurs importés avec succès.";
+            $alert = "Utilisateurs importés avec succès.";
         }
     } else {
-        $alert = "❌ Erreur lors de l'import.";
+        $alert = "Erreur lors de l'import.";
     }
 }
 
-// 📄 Récupérer utilisateurs actifs
+// Utilisateurs actifs
 $result = $conn->query("SELECT id, login FROM user WHERE login != 'adminweb' ORDER BY login");
 
-// 📜 Récupérer historique suppressions
-$historique = $conn->query("SELECT login, date_suppression FROM utilisateurs_supprimes ORDER BY date_suppression DESC");
+// Log fichier
+$log_entries = file_exists('logs/suppressions.log') ? file('logs/suppressions.log') : [];
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <title>SAE - Admin WEB</title>
-    <link rel="icon" href="Images/Logo.png">
-    <title>Admin Web</title>
     <meta charset="UTF-8">
     <link href="css/style.css" rel="stylesheet">
 </head>
@@ -118,7 +114,7 @@ $historique = $conn->query("SELECT login, date_suppression FROM utilisateurs_sup
         <?php endif; ?>
 
         <h2>Utilisateurs inscrits</h2>
-        <table >
+        <table border="1">
             <tr><th>Login</th><th>Supprimer</th></tr>
             <?php while ($row = $result->fetch_assoc()): ?>
                 <tr>
@@ -133,24 +129,19 @@ $historique = $conn->query("SELECT login, date_suppression FROM utilisateurs_sup
             <?php endwhile; ?>
         </table>
 
-    <h2>Importer des utilisateurs (CSV)</h2>
-    <form method="post" enctype="multipart/form-data">
-        <input type="file" name="csv_file" accept=".csv" required>
-        <button type="submit">Importer</button>
-    </form>
+        <h2>Importer des utilisateurs (CSV)</h2>
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" name="csv_file" accept=".csv" required>
+            <button type="submit">Importer</button>
+        </form>
 
-    <h2>Historique des utilisateurs supprimés</h2>
-    <table>
-        <tr><th>Login</th><th>Date de suppression</th></tr>
-        <?php while ($row = $historique->fetch_assoc()): ?>
-            <tr>
-                <td><?= htmlspecialchars($row['login']) ?></td>
-                <td><?= htmlspecialchars($row['date_suppression']) ?></td>
-            </tr>
-        <?php endwhile; ?>
-</table>
+        <h2>Historique des suppressions</h2>
+        <pre style="background:#f9f9f9; border:1px solid #ccc; padding:10px; max-height:200px; overflow-y:auto;">
+<?php foreach ($log_entries as $line): ?>
+<?= htmlspecialchars($line) ?>
+<?php endforeach; ?>
+        </pre>
     </div>
-    
 </main>
 
 <footer>
@@ -160,17 +151,9 @@ $historique = $conn->query("SELECT login, date_suppression FROM utilisateurs_sup
             <li>KOUNDI Maryam</li>
             <li>NIEL Ronan</li>
             <li>BELOT Hervé</li>
-        </ul>Add commentMore actions
+        </ul>
     </div>
 </footer>
 
-
 </body>
 </html>
-
-
-
-
-
-
-
