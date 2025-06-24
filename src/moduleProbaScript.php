@@ -57,7 +57,7 @@ function rectangle_median($m, $c, $t, $n) {
 
     for ($i = 0; $i < $n; $i++) {
         $x = $a + ($i + 0.5) * $h;
-        $formule = ($c / sqrt(2 * M_PI * $c)) * exp(-0.5 * pow(($x - $m) / $c, 2));
+        $formule = (1 / ($c * sqrt(2 * M_PI))) * exp(-0.5 * pow(($x - $m) / $c, 2));
         $somme += $formule;
     }
 
