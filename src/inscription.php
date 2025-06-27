@@ -97,9 +97,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label for="identifiant"><h2>Identifiant</h2></label>
             <input type="text" id="identifiant" name="identifiant" required>
             
-            <label for="identifiant"><h2>Mot de passe</h2></label>
+            <label for="mot_de_passe"><h2>Mot de passe</h2></label>
             <input type="password" id="mot_de_passe" name="passwd" required>
-            <label for="captcha"><h2>Captcha</h2></label>
+            <h2>Captcha</h2>
             <label for="captcha" style="font-weight:bold; font-size:1.5em; letter-spacing: 4px; user-select:none;">
                 <?= htmlspecialchars($captcha) ?>
             </label>
