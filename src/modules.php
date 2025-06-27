@@ -1,5 +1,12 @@
 <?php
 session_start(); // Démarre la session pour accéder aux variables de session
+
+if (!isset($_SESSION['user_id'])) {
+    echo "<p style='color:red;'>⚠️ user_id NON DÉFINI</p>";
+} else {
+    echo "<p style='color:green;'>✅ user_id = {$_SESSION['user_id']}</p>";
+}
+
 if (!isset($_SESSION['identifiant'])) {
     header('Location: index.php');
     exit();
@@ -17,7 +24,7 @@ if ($conn->connect_error) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['supprimer_colonne'])) {
     $id = intval($_POST['supprimer_colonne']);
-    $user_id = $_SESSION['id'] ?? null;
+    $user_id = $_SESSION['user_id'] ?? null;
 
     if ($user_id !== null) {
         $stmt = $conn->prepare("DELETE FROM resultats WHERE id = ? AND user_id = ?");
@@ -32,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['supprimer_colonne']))
 
         $stmt->close();
     } else {
-        $_SESSION['error_message'] = "Utilisateur non connecté.";
+        $_SESSION['error_message'] = "Impossible de supprimer ";
     }
 }
 ?>
