@@ -40,10 +40,10 @@ if (!isset($_SESSION['identifiant'])) {
         <p>Le système ADFGVX est un moyen de chiffrer un message en utilisant une table spéciale. Chaque lettre ou chiffre du message est transformé en une paire de lettres parmi A, D, F, G, V, X pour cacher son contenu.</p>
 
         <form method="post" action="calcul_crypto.php" class="mod1">
-            <label for="chiffrer">Mot à chiffrer</label>
+            <label for="mot_a_chiffrer">Mot à chiffrer</label>
             <input type="text" id="mot_a_chiffrer" name="mot_a_chiffrer" placeholder="ex : perdu">
 
-            <label for="dechiffrer">Mot à déchiffrer</label>
+            <label for="mot_a_dechiffrer">Mot à déchiffrer</label>
             <input type="text" id="mot_a_dechiffrer" name="mot_a_dechiffrer" placeholder="ex : GDADDDDVDX">
 
             <input type="submit" class="Btn_calc" value="Valider">
