@@ -38,6 +38,14 @@ if (!isset($_SESSION['identifiant'])) {
                 <button class="Btn_mod" onclick="location.href='modules.php'">Loi normale</button>
                 <button class="Btn_mod" onclick="location.href='cryptographie.php'">Cryptographie</button>
                 <button class="Btn_mod" onclick="location.href='profil.php'">Profil</button>
+                <?php if (!isset($_SESSION['identifiant']) || $_SESSION['identifiant'] !== 'adminweb'){
+                echo '<button class="Btn_mod" onclick="location.href=\'admin_web.php\'">Dashboard</button>';
+                }
+                ?>
+                <?php if (!isset($_SESSION['identifiant']) || $_SESSION['identifiant'] !== 'sysadmin'){
+                echo '<button class="Btn_mod" onclick="location.href=\'admin_Systeme.php\'">Dashboard</button>';
+                }
+                ?>
             </div>
 
             <div class="center_acc">
