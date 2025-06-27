@@ -129,7 +129,7 @@ $result = $conn->query("SELECT id, login FROM user WHERE login != 'adminweb' ORD
                     <td>
                         <form method="post" onsubmit="return confirm('Supprimer cet utilisateur ?');">
                             <input type="hidden" name="supprimer_user_id" value="<?= $row['id'] ?>">
-                            <button class="Btn_Sup">❌</button>
+                            <button class="Btn_Sup">X</button>
                         </form>
                     </td>
                 </tr>
@@ -138,7 +138,8 @@ $result = $conn->query("SELECT id, login FROM user WHERE login != 'adminweb' ORD
 
         <h2>Importer des utilisateurs (CSV)</h2>
         <form method="post" enctype="multipart/form-data">
-            <input type="file" name="csv_file" accept=".csv" required>
+            <label for="import">fichier</label>
+            <input id="import" type="file" name="csv_file" accept=".csv" required>
             <button type="submit">Importer</button>
         </form>
     </div>
