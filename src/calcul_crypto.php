@@ -1,6 +1,16 @@
 <?php
 session_start();
 
+$host = 'localhost';
+$db   = 'sae';
+$user = 'admin';
+$pass = 'admin';
+
+$conn = new mysqli($host, $user, $pass, $db);
+if ($conn->connect_error) {
+    die("Connexion échouée : " . $conn->connect_error);
+}
+
 if (!isset($_SESSION['identifiant'])) {
     header('Location: index.php'); // Redirige vers la page de connexion si non connecté
     exit();
@@ -12,7 +22,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (!empty($mot_cry)) {
         $mot_crypte_resultat = crypter($mot_cry);
-        $_SESSION['resultat_crypto'] = $mot_crypte_resultat; // ou $mot_decrypte_resultat
+        $_SESSION['resultat_crypto'] = $mot_crypte_resultat;
+
+
+        $user_id = $_SESSION['user_id'];
+        $stmt = $conn->prepare("INSERT INTO crypto (user_id, moyenne, ecart_type, portee, pas, resultat) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("s", $mot_crypte_resultat);
+        $stmt->execute();
+        $stmt->close();
+
+        $_SESSION['message'] = "Résultat enregistré avec succès.";
+
         header("Location: cryptographie.php");
         exit;
     } else if (!empty($mot_decry)) {
@@ -21,6 +41,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['error_message'] = "Erreur : le texte à déchiffrer doit avoir un nombre pair de caractères.";
         } else{
             $mot_decrypte_resultat = decrypter($mot_decry);
+
+            $user_id = $_SESSION['user_id'];
+            $stmt = $conn->prepare("INSERT INTO crypto (user_id, moyenne, ecart_type, portee, pas, resultat) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("s", $mot_decrypte_resultat);
+            $stmt->execute();
+            $stmt->close();
+
             $_SESSION['resultat_crypto'] = $mot_decrypte_resultat;
         }
         header("Location: cryptographie.php");

@@ -65,6 +65,81 @@ if (!isset($_SESSION['identifiant'])) {
             ?>
         </div>
 
+
+    <div class="historique">
+    <h2>Historique des derniers calculs</h2>
+    <?php
+    if (!isset($_SESSION['user_id'])) {
+        echo "<p class='error'>Erreur : utilisateur non connecté.</p>";
+    } else {
+        $user_id = $_SESSION['user_id'];
+        $conn = new mysqli('localhost', 'admin', 'admin', 'sae');
+        if ($conn->connect_error) {
+            echo "<p class='error'>Erreur de connexion à la base de données.</p>";
+        } else {
+            $sql = "SELECT id, moyenne, ecart_type, portee, pas, resultat, date_calcul 
+                    FROM crypto 
+                    WHERE user_id = ? 
+                    ORDER BY date_calcul DESC 
+                    LIMIT 5";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("i", $user_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result && $result->num_rows > 0) {
+                ?>
+                <table class="table-historique">
+                    <thead>
+                        <tr>
+                            <th>Chiffrer</th>
+                            <th>Déchiffrer</th>
+                            <th>Date</th>
+                    
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php while ($row = $result->fetch_assoc()) { ?>
+                        <tr>
+                            <td><?= htmlspecialchars($row['moyenne']) ?></td>
+                            <td><?= htmlspecialchars($row['ecart_type']) ?></td>
+                            <td><?= htmlspecialchars($row['portee']) ?></td>
+                            <td><?= htmlspecialchars($row['pas']) ?></td>
+                            <td><?= htmlspecialchars($row['resultat']) ?></td>
+                            <td><?= htmlspecialchars($row['date_calcul']) ?></td>
+                            <td>
+                                <form method="post" onsubmit="return confirm('Supprimer ce calcul ?');">
+                                    <input type="hidden" name="supprimer_colonne" value="<?= $row['id'] ?>">
+                                    <button class="Btn_Sup">X</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                    </tbody>
+                </table>
+                <?php
+            } else {
+                echo "<p>Aucun calcul enregistré.</p>";
+            }
+
+            $stmt->close();
+            $conn->close();
+        }
+    }
+    ?>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
 </div>
 

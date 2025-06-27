@@ -57,6 +57,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['supprimer_user_id']))
     }
 }
 
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['supprimer_historique'])) {
+    $user_id = intval($_POST['supprimer_historique']);
+    
+    if($user_id !== null){
+
+        $stmt = $conn->prepare("DELETE FROM resultats WHERE user_id = ?");
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+
+        if ($stmt->affected_rows > 0) {
+            $_SESSION['message'] = "Historique supprimé avec succès.";
+        } else {
+            $_SESSION['error_message'] = "Erreur lors de la supression de l'historique";
+        }
+
+        $stmt->close();
+
+    }else {
+        $_SESSION['error_message'] = "Erreur de la fonction supprimer historique";
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
 // Import CSV
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['csv_file'])) {
     if ($_FILES['csv_file']['error'] === 0) {
@@ -122,13 +156,19 @@ $result = $conn->query("SELECT id, login FROM user WHERE login != 'adminweb' ORD
 
         <h2>Utilisateurs inscrits</h2>
         <table border="1">
-            <tr><th>Login</th><th>Supprimer</th></tr>
+            <tr><th>Login</th><th>Supprimer utilisateur</th><th>Supprimer historique</th></tr>
             <?php while ($row = $result->fetch_assoc()): ?>
                 <tr>
                     <td><?= htmlspecialchars($row['login']) ?></td>
                     <td>
                         <form method="post" onsubmit="return confirm('Supprimer cet utilisateur ?');">
                             <input type="hidden" name="supprimer_user_id" value="<?= $row['id'] ?>">
+                            <button class="Btn_Sup">X</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form method="post" onsubmit="return confirm('Supprimer historique lier a cette utilisateur ?');">
+                            <input type="hidden" name="supprimer_historique" value="<?= $row['id'] ?>">
                             <button class="Btn_Sup">X</button>
                         </form>
                     </td>
