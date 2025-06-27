@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <button class="Btn_mod" onclick="location.href='modules.php'">Loi normale</button>
             <button class="Btn_mod" onclick="location.href='cryptographie.php'">Cryptographie</button>
             <?php if ($_SESSION['identifiant'] == 'adminweb'){
-            echo '<button class="Btn_mod" onclick="location.href=\'admin_web.php\'">Dashboard</button>';
+            echo '<button class="Btn_mod" onclick="location.href=\'admin_Web.php\'">Dashboard</button>';
             }
             ?>
             <?php if ($_SESSION['identifiant'] == 'sysadmin'){
