@@ -1,12 +1,6 @@
 <?php
 session_start(); // Démarre la session pour accéder aux variables de session
 
-if (!isset($_SESSION['user_id'])) {
-    echo "<p style='color:red;'>⚠️ user_id NON DÉFINI</p>";
-} else {
-    echo "<p style='color:green;'>✅ user_id = {$_SESSION['user_id']}</p>";
-}
-
 if (!isset($_SESSION['identifiant'])) {
     header('Location: index.php');
     exit();
