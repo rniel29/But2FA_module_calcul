@@ -93,15 +93,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p style="color:red; text-align:center;"><?= htmlspecialchars($message) ?></p>
         <?php endif; ?>
         <form class="Formulaire" method="POST" action="">
-            <h2>Identifiant</h2>
+            
+            <label for="identifiant"><h2>Identifiant</h2></label>
             <input type="text" id="identifiant" name="identifiant" required>
-            <h2>Mot de passe</h2>
+            
+            <label for="identifiant"><h2>Mot de passe</h2></label>
             <input type="password" id="mot_de_passe" name="passwd" required>
-            <h2>Captcha</h2>
-            <label style="font-weight:bold; font-size:1.5em; letter-spacing: 4px; user-select:none;">
+            <label for="captcha"><h2>Captcha</h2></label>
+            <label for="captcha" style="font-weight:bold; font-size:1.5em; letter-spacing: 4px; user-select:none;">
                 <?= htmlspecialchars($captcha) ?>
             </label>
-            <input type="text" name="captcha" placeholder="Captcha" required>
+            <input id="captcha" type="text" name="captcha" placeholder="Captcha" required>
             <br><br>
             <input class="Btn_Form_Co" type="submit" name="inscription" value="S'inscrire">
         </form>
