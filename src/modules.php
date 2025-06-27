@@ -17,7 +17,7 @@ if ($conn->connect_error) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['supprimer_colonne'])) {
     $id = intval($_POST['supprimer_colonne']);
-    $user_id = $_SESSION['user_id'] ?? null;
+    $user_id = $_SESSION['id'] ?? null;
 
     if ($user_id !== null) {
         $stmt = $conn->prepare("DELETE FROM resultats WHERE id = ? AND user_id = ?");
