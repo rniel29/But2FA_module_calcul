@@ -23,41 +23,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!empty($mot_cry)) {
         $mot_crypte_resultat = crypter($mot_cry);
         $_SESSION['resultat_crypto'] = $mot_crypte_resultat;
-
-
+    
         $user_id = $_SESSION['user_id'];
-        $stmt = $conn->prepare("INSERT INTO crypto (user_id, moyenne, ecart_type, portee, pas, resultat) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("s", $mot_crypte_resultat);
+        $now = date('Y-m-d H:i:s');
+    
+        $stmt = $conn->prepare("INSERT INTO crypto (user_id, date_crypto, texte, resultat) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("isss", $user_id, $now, $mot_cry, $mot_crypte_resultat);
         $stmt->execute();
         $stmt->close();
-
+    
         $_SESSION['message'] = "Résultat enregistré avec succès.";
-
         header("Location: cryptographie.php");
         exit;
-    } else if (!empty($mot_decry)) {
-
-        if(strlen($mot_decry) % 2 != 0){
+    } elseif (!empty($mot_decry)) {
+        if (strlen($mot_decry) % 2 != 0) {
             $_SESSION['error_message'] = "Erreur : le texte à déchiffrer doit avoir un nombre pair de caractères.";
-        } else{
+        } else {
             $mot_decrypte_resultat = decrypter($mot_decry);
-
+    
             $user_id = $_SESSION['user_id'];
-            $stmt = $conn->prepare("INSERT INTO crypto (user_id, moyenne, ecart_type, portee, pas, resultat) VALUES (?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("s", $mot_decrypte_resultat);
+            $now = date('Y-m-d H:i:s');
+    
+            $stmt = $conn->prepare("INSERT INTO crypto (user_id, date_crypto, texte, resultat) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("isss", $user_id, $now, $mot_decry, $mot_decrypte_resultat);
             $stmt->execute();
             $stmt->close();
-
+    
             $_SESSION['resultat_crypto'] = $mot_decrypte_resultat;
         }
         header("Location: cryptographie.php");
         exit;
+    }
+    
     } else {
         $_SESSION['error_message'] = "Erreur : veuillez remplir au moins un des deux champs.";
         header("Location: cryptographie.php");
         exit;
     }
-}
+
 
 
 function crypter($mot) {
