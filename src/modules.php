@@ -5,7 +5,40 @@ if (!isset($_SESSION['identifiant'])) {
     exit();
 }
 
+$alert = '';
+$host = 'localhost';
+$db   = 'sae';
+$user = 'admin';
+$pass = 'admin';
+$conn = new mysqli($host, $user, $pass, $db);
+if ($conn->connect_error) {
+    die("Erreur de connexion : " . $conn->connect_error);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['supprimer_colonne'])) {
+    $id = intval($_POST['supprimer_colonne']);
+    $user_id = $_SESSION['user_id'] ?? null;
+
+    if ($user_id !== null) {
+        $stmt = $conn->prepare("DELETE FROM resultats WHERE id = ? AND user_id = ?");
+        $stmt->bind_param("ii", $id, $user_id);
+        $stmt->execute();
+
+        if ($stmt->affected_rows > 0) {
+            $_SESSION['message'] = "Calcul supprimé avec succès.";
+        } else {
+            $_SESSION['error_message'] = "Erreur : calcul introuvable ou suppression non autorisée.";
+        }
+
+        $stmt->close();
+    } else {
+        $_SESSION['error_message'] = "Utilisateur non connecté.";
+    }
+}
 ?>
+
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -112,13 +145,38 @@ if (!isset($_SESSION['identifiant'])) {
 
                 echo "<div class='historique'><h2>Ton historique</h2><ul>";
                 if ($result && $result->num_rows > 0) {
+                    echo "<table class='table-historique'>";
+                    echo "<thead>
+                            <tr>
+                                <th>Moyenne</th>
+                                <th>Écart type</th>
+                                <th>Portée</th>
+                                <th>Rectangles</th>
+                                <th>Résultat</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead><tbody>";
                     while ($row = $result->fetch_assoc()) {
-                        echo "<li>m={$row['moyenne']}, c={$row['ecart_type']}, t={$row['portee']}, n={$row['pas']} → P(X≤t) ≈ {$row['resultat']} ({$row['date_calcul']})</li>";
-                    }
-                } else {
-                    echo "<li>Aucun calcul enregistré.</li>";
+                        echo "<tr>";
+                        echo "<td>{$row['moyenne']}</td>";
+                        echo "<td>{$row['ecart_type']}</td>";
+                        echo "<td>{$row['portee']}</td>";
+                        echo "<td>{$row['pas']}</td>";
+                        echo "<td>{$row['resultat']}</td>";
+                        echo "<td>{$row['date_calcul']}</td>";
+                        echo "<td>
+                                <form method='post' action='' onsubmit='return confirm(\"Supprimer ce calcul ?\")'>
+                                    <input type='hidden' name='supprimer_colonne' value='{$row['id']}'>
+                                    <input type='submit' value='Supprimer'>
+                                </form>
+                            </td>";
+                        echo "</tr>";
                 }
-                echo "</ul></div>";
+                echo "</tbody></table>";
+            } else {
+                echo "<p>Aucun calcul enregistré.</p>";
+            }
 
                 $stmt->close();
                 $conn->close();
