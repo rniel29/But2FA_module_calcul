@@ -46,9 +46,13 @@ if (!isset($_SESSION['identifiant'])) {
                     <video id="video" controls="" autoplay="" name="media"><source src="Video/DUT_Informatique.mp4" type="video/mp4"></video>
                 </div>
                 <div class="Presentation">
-                    <h1>Titre</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa nobis repellendus enim quis. Distinctio, reiciendis iste adipisci sunt quo similique rerum! Molestiae repellat id itaque ad alias doloremque velit labore!</p>
-                </div>
+                    <h1>Bienvenue sur Modul∈Calcul ! <?php echo htmlspecialchars($identifiant); ?></h1>
+                    <p> Ici, nous vous proposons divers modules de calculs mathématiques, vous aurez le choix entre :</p>
+                    <ul>
+                        <li>Loi normale qui décrit de manière théorique une expérience aléatoire </li>
+                        <li>Cryptographie pour chiffrer vos messages</li>
+                    </ul>
+                    <p>Vous pourrez également profiter d'un accès à votre historique, ainsi, vous pourrez préserver vos calculs les plus importants. </p>
                 </div>
         </main>
         <footer>
