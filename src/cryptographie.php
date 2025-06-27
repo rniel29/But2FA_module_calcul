@@ -85,10 +85,19 @@ if (!isset($_SESSION['identifiant'])) {
         if ($conn->connect_error) {
             echo "<p class='error'>Erreur de connexion à la base de données.</p>";
         } else {
-            $sql = "SELECT id, moyenne, ecart_type, portee, pas, resultat, date_calcul 
+            // Gestion suppression d'un historique
+            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['supprimer_colonne'])) {
+                $idToDelete = intval($_POST['supprimer_colonne']);
+                $stmtDel = $conn->prepare("DELETE FROM crypto WHERE id = ? AND user_id = ?");
+                $stmtDel->bind_param("ii", $idToDelete, $user_id);
+                $stmtDel->execute();
+                $stmtDel->close();
+            }
+
+            $sql = "SELECT id, texte, resultat, date_crypto 
                     FROM crypto 
                     WHERE user_id = ? 
-                    ORDER BY date_calcul DESC 
+                    ORDER BY date_crypto DESC 
                     LIMIT 5";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("i", $user_id);
@@ -100,21 +109,18 @@ if (!isset($_SESSION['identifiant'])) {
                 <table class="table-historique">
                     <thead>
                         <tr>
-                            <th>Chiffrer</th>
-                            <th>Déchiffrer</th>
+                            <th>Texte</th>
+                            <th>Résultat</th>
                             <th>Date</th>
-                    
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                     <?php while ($row = $result->fetch_assoc()) { ?>
                         <tr>
-                            <td><?= htmlspecialchars($row['moyenne']) ?></td>
-                            <td><?= htmlspecialchars($row['ecart_type']) ?></td>
-                            <td><?= htmlspecialchars($row['portee']) ?></td>
-                            <td><?= htmlspecialchars($row['pas']) ?></td>
+                            <td><?= htmlspecialchars($row['texte']) ?></td>
                             <td><?= htmlspecialchars($row['resultat']) ?></td>
-                            <td><?= htmlspecialchars($row['date_calcul']) ?></td>
+                            <td><?= htmlspecialchars($row['date_crypto']) ?></td>
                             <td>
                                 <form method="post" onsubmit="return confirm('Supprimer ce calcul ?');">
                                     <input type="hidden" name="supprimer_colonne" value="<?= $row['id'] ?>">
@@ -135,18 +141,8 @@ if (!isset($_SESSION['identifiant'])) {
         }
     }
     ?>
+
 </div>
-
-
-
-
-
-
-
-
-
-
-
 
     </div>
 </div>
