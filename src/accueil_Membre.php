@@ -1,6 +1,7 @@
 
 <?php
 session_start();
+$identifiant = $_SESSION['identifiant'];
 
 if (!isset($_SESSION['identifiant'])) {
     header('Location: index.php'); // Redirige vers la page de connexion si non connecté
