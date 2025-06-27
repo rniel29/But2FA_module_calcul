@@ -93,11 +93,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <br>
                 <form class="Formulaire" method="POST" action=''>
                     <div class="Titre_Formulaire"></div>
-                    <h2>Identifiant</h2>
-                    <label for="identifiant"></label>
+                    <label for="identifiant"><h2>Identifiant</h2></label>
                     <input type="text" id="identifiant" name="identifiant">
-                    <h2>Mot de passe</h2>
-                    <label class="input_pswd" for="mot_de_passe"></label>
+                    <label class="input_pswd" for="mot_de_passe"><h2>Mot de passe</h2></label>
                     <input type="password" id ="mot_de_passe" name= "passwd">
                     <input class="Btn_Form_Co" type="submit" name="connexion" value="Se connecter">
 

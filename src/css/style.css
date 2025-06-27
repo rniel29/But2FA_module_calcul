@@ -99,7 +99,7 @@ html,body{
     background-color: white;
 }
 
-.buttons, a{
+.buttons{
     text-decoration: none;
     display: flex;
     background-color: #517a76;
